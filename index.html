@@ -454,6 +454,12 @@ body{
 .profile-head p{margin:0; font-size:12px; color:var(--text-sub);}
 .profile-head .profile-bio{margin-top:6px; font-size:11.5px; color:var(--text-main); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.7;}
 .pc-field{margin-bottom:14px;}
+.city-quick-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+.city-quick-chip{
+  background:rgba(212,175,90,0.12); border:1px solid rgba(212,175,90,0.3); border-radius:12px;
+  padding:9px 6px; text-align:center; font-size:12px; font-weight:700; color:var(--text-main); cursor:pointer;
+}
+.city-quick-chip:active{ background:rgba(212,175,90,0.22); }
 .pc-field:last-of-type{margin-bottom:0;}
 .pc-field label{display:block; font-size:11.5px; font-weight:700; margin-bottom:8px; color:var(--text-main);}
 .pc-field textarea{
@@ -790,6 +796,20 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .ns-text p{margin:0; font-size:11px; color:var(--text-sub); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .ns-go{font-size:10.5px; color:var(--green); font-weight:700; flex-shrink:0; background:var(--cream-deep); padding:6px 10px; border-radius:10px;}
 
+.news-grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+.news-tile{
+  aspect-ratio:1/1; background:var(--card); border-radius:16px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px;
+  padding:8px 6px; cursor:pointer; border:1px solid rgba(212,175,90,0.15);
+}
+.news-tile:active{ transform:scale(0.94); }
+.nt-icon{
+  width:38px;height:38px;border-radius:11px; background:linear-gradient(145deg,var(--sage),var(--green-soft));
+  display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+.nt-icon img{width:22px;height:22px; object-fit:contain; border-radius:5px;}
+.news-tile span{font-size:9.5px; font-weight:700; text-align:center; line-height:1.35; color:var(--text-main);}
+
 /* =========================================================
    NEW: Economy screen
 ========================================================= */
@@ -830,6 +850,26 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .dollar-spotlight .ds-foot{position:relative; font-size:10px; opacity:.65; margin-top:10px; line-height:1.7;}
 .econ-updated{font-size:10.5px; color:var(--text-sub); text-align:center; margin:6px 0 18px 0;}
 .econ-refresh{display:flex; align-items:center; gap:6px; justify-content:center; font-size:11px; color:var(--green); font-weight:700; cursor:pointer; margin-bottom:16px;}
+
+/* ---------- Economy top-3 spotlight (USD / Gold / Full Coin) ---------- */
+.econ-top3{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:18px; }
+.econ-t3-card{
+  position:relative; overflow:hidden; border-radius:18px; padding:12px 8px 10px 8px; text-align:center;
+  background:linear-gradient(160deg, var(--green-deep), var(--green) 90%); color:#F7F3E9;
+  box-shadow:0 10px 24px rgba(15,61,46,0.25);
+}
+[data-theme="dark"] .econ-t3-card{ color:#F1EEE2; }
+.econ-t3-card::after{ content:''; position:absolute; inset:0; opacity:.45; pointer-events:none; background:radial-gradient(circle at 85% -10%, rgba(212,175,90,0.4), transparent 60%); }
+.econ-t3-card .t3-icon{
+  width:32px;height:32px;border-radius:10px; margin:0 auto 6px auto; position:relative;
+  background:rgba(255,255,255,0.16); display:flex; align-items:center; justify-content:center;
+}
+.econ-t3-card .t3-icon svg{ width:16px;height:16px; }
+.econ-t3-card .t3-label{ position:relative; font-size:10px; font-weight:700; opacity:.85; margin-bottom:4px; }
+.econ-t3-card .t3-value{ position:relative; font-size:13px; font-weight:800; direction:ltr; line-height:1.3; }
+.econ-t3-card .t3-chg{ position:relative; font-size:9px; font-weight:700; margin-top:4px; opacity:.9; }
+.econ-t3-card .t3-chg.up{ color:#8CF0B8; }
+.econ-t3-card .t3-chg.down{ color:#FFB4B4; }
 .econ-refresh svg{width:14px;height:14px;}
 .econ-refresh.spin svg{animation:spin 0.8s linear infinite;}
 .econ-note{font-size:11px; color:var(--text-sub); line-height:1.8; background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); margin-top:6px;}
@@ -861,6 +901,14 @@ h1,h2,h3,h4,p{font-family:inherit;}
 [data-theme="dark"] .navasan-embed-wrap{ background:rgba(18,32,26,0.45); border:1px solid rgba(255,255,255,0.08); }
 .navasan-embed-wrap table{ width:100%; border-collapse:collapse; font-size:11.5px; color:var(--text-main); }
 .navasan-embed-wrap td, .navasan-embed-wrap th{ padding:7px 8px; border-bottom:1px solid rgba(127,127,127,0.15); text-align:center; }
+/* Force-override the third-party widget's own inline colors so it stays readable in both themes */
+.navasan-embed-wrap, .navasan-embed-wrap *{
+  color:var(--text-main) !important;
+  background-color:transparent !important;
+  border-color:rgba(127,127,127,0.18) !important;
+  font-family:inherit !important;
+}
+.navasan-embed-wrap tr:nth-child(even){ background-color:rgba(127,127,127,0.06) !important; }
 .library-tabs{display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:14px; -ms-overflow-style:none;}
 .library-tabs::-webkit-scrollbar{display:none;}
 
@@ -1218,7 +1266,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
       </div>
       <button class="home-avatar-btn" id="homeAvatarBtn" onclick="go('profile')" aria-label="پروفایل من"></button>
       <button class="dots-btn" onclick="openDrawer()" aria-label="منو">
-        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
       </button>
     </div>
 
@@ -1446,9 +1494,17 @@ h1,h2,h3,h4,p{font-family:inherit;}
       <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">شعر</div><div class="t2">۱۰۰ بیت و شعر ماندگار فارسی</div></div>
       <div style="width:40px;"></div>
     </div>
-    <div class="lib-search" style="margin-bottom:12px;">
+    <div class="lib-search" style="margin-bottom:10px;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input type="text" id="poemSearchInput" placeholder="جستجو بر اساس نام شاعر..." oninput="renderPoems(this.value)">
+    </div>
+    <div class="seg-control" style="margin:0 0 16px 0; overflow-x:auto; white-space:nowrap; display:flex;">
+      <button class="active" onclick="filterPoemChip('', this)">همه</button>
+      <button onclick="filterPoemChip('حافظ', this)">حافظ</button>
+      <button onclick="filterPoemChip('سعدی', this)">سعدی</button>
+      <button onclick="filterPoemChip('مولوی', this)">مولوی</button>
+      <button onclick="filterPoemChip('فردوسی', this)">فردوسی</button>
+      <button onclick="filterPoemChip('خیام', this)">خیام</button>
     </div>
     <div id="poemsList"></div>
   </section>
@@ -1461,7 +1517,11 @@ h1,h2,h3,h4,p{font-family:inherit;}
       <div style="width:40px;"></div>
     </div>
 
-    <div class="section-title" style="margin-top:0;">آرشیو سخنرانی — صدا و سیما</div>
+    <div class="section-title" style="margin-top:0;">آرشیو سخنرانی</div>
+    <div class="seg-control" style="margin:0 0 12px 0;">
+      <button class="active" id="speechSrcBtn-iranseda" onclick="setSpeechSource('iranseda')">صدا و سیما</button>
+      <button id="speechSrcBtn-vaezin" onclick="setSpeechSource('vaezin')">واعظین</button>
+    </div>
     <div class="kashoob-toolbar">
       <button class="kt-btn" onclick="toggleSokhanraniSize()" id="sokhanraniExpandBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m11 0h3a2 2 0 002-2v-3"/></svg><span>بزرگ‌نمایی</span></button>
       <button class="kt-btn" onclick="toggleSokhanraniVisible()" id="sokhanraniHideBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a19.7 19.7 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a19.7 19.7 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24M1 1l22 22"/></svg><span>مخفی کردن</span></button>
@@ -1469,7 +1529,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
     <div class="kashoob-embed-wrap" id="sokhanraniWrap">
       <iframe id="sokhanraniFrame" src="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    <p style="font-size:10.5px; color:var(--text-sub); margin:8px 2px 16px 2px;">این بخش آرشیو سخنرانی‌های سایت صدا و سیما (سخنرانی) را به‌صورت زنده نمایش می‌دهد. اگر بارگذاری نشد، به‌دلیل محدودیت نمایش داخل برنامه توسط سایت مقصد است — <a href="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" target="_blank" style="color:var(--green); font-weight:700;">اینجا</a> در تب جدید باز کنید.</p>
+    <p style="font-size:10.5px; color:var(--text-sub); margin:8px 2px 16px 2px;" id="sokhanraniFallbackNote">این بخش آرشیو سخنرانی‌ها را به‌صورت زنده نمایش می‌دهد. اگر بارگذاری نشد، به‌دلیل محدودیت نمایش داخل برنامه توسط سایت مقصد است — <a id="sokhanraniExternalLink" href="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" target="_blank" style="color:var(--green); font-weight:700;">اینجا</a> در تب جدید باز کنید.</p>
 
     <div class="section-title">گزیده‌های کوتاه</div>
     <div id="speechesList"></div>
@@ -1605,9 +1665,9 @@ h1,h2,h3,h4,p{font-family:inherit;}
     </div>
     <div class="econ-updated" id="econUpdated">در حال دریافت آخرین قیمت‌ها...</div>
 
-    <div class="dollar-spotlight" id="dollarSpotlight"></div>
+    <div class="econ-top3" id="econTop3"></div>
 
-    <div class="section-title">طلا و سکه</div>
+    <div class="section-title">جزئیات طلا و سکه</div>
     <div class="price-grid" id="goldPriceGrid"></div>
 
     <div class="section-title">نرخ لحظه‌ای ارزهای پرکاربرد</div>
@@ -2378,6 +2438,18 @@ function toggleKashoobVisible(){
 /* ============ SOKHANRANI (سخنرانی) EMBED — resize / hide controls ============ */
 let sokhanraniExpanded = false;
 let sokhanraniVisible = true;
+const SPEECH_SOURCES = {
+  iranseda: 'https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda',
+  vaezin: 'https://vaezin.com/'
+};
+function setSpeechSource(key){
+  const url = SPEECH_SOURCES[key];
+  if(!url) return;
+  document.getElementById('sokhanraniFrame').src = url;
+  document.getElementById('sokhanraniExternalLink').href = url;
+  document.getElementById('speechSrcBtn-iranseda').classList.toggle('active', key==='iranseda');
+  document.getElementById('speechSrcBtn-vaezin').classList.toggle('active', key==='vaezin');
+}
 function toggleSokhanraniSize(){
   sokhanraniExpanded = !sokhanraniExpanded;
   const wrap = document.getElementById('sokhanraniWrap');
@@ -2997,7 +3069,25 @@ const SAYINGS = [
   {c:'shahid', t:'اسلام دینی است که میان عقل و عشق، میان دنیا و آخرت، و میان فرد و جامعه توازن برقرار کرده است.', s:'شهید مرتضی مطهری'},
   {c:'shahid', t:'ما برای رسیدن به هدف، از هیچ فداکاری دریغ نخواهیم کرد؛ خون شهیدان چراغ راه آیندگان است.', s:'منسوب به شهدای دفاع مقدس'},
   {c:'shahid', t:'انسان تا وقتی به خدا وابسته نشود، در برابر هیچ سختی‌ای استوار نخواهد ماند؛ توکل، منشأ همه‌ی مقاومت‌هاست.', s:'شهید سید عبدالحسین دستغیب'},
-  {c:'shahid', t:'بهترین درس برای ما، ایستادگی و صبر در راه حق است؛ هرچند این راه سخت و پرهزینه باشد.', s:'منسوب به شهدای دفاع مقدس'}
+  {c:'shahid', t:'بهترین درس برای ما، ایستادگی و صبر در راه حق است؛ هرچند این راه سخت و پرهزینه باشد.', s:'منسوب به شهدای دفاع مقدس'},
+  {c:'nabi', t:'أُطلُبوا العِلمَ مِن المَهدِ إلی اللَّحد — از گاهواره تا گور، دانش بجویید.', s:'حدیث مشهور نبوی'},
+  {c:'nabi', t:'الجارُ ثُمَّ الدار — نخست همسایه را در نظر بگیرید، سپس خانه را.', s:'پیامبر اکرم(ص)'},
+  {c:'nabi', t:'مَن غَشَّنا فَلَیسَ مِنّا — هر که با ما نیرنگ ورزد، از ما نیست.', s:'پیامبر اکرم(ص)'},
+  {c:'nabi', t:'الدُّعاءُ سِلاحُ المؤمن — دعا، سلاح مؤمن است.', s:'حدیث مشهور نبوی'},
+  {c:'nabi', t:'خَیرُ الصَّدَقَةِ ما کان عن ظَهرِ غِنیً — بهترین صدقه آن است که از روی بی‌نیازی داده شود.', s:'پیامبر اکرم(ص)'},
+  {c:'aimma', t:'العالِمُ بِزَمانِه لا تَهجُمُ عَلَیهِ اللَّوابِس — کسی که به زمانه‌ی خویش آگاه است، دچار شبهات گمراه‌کننده نمی‌شود.', s:'امام علی(ع) — نهج‌البلاغه'},
+  {c:'aimma', t:'إذا هَبَّت أمثالُکُم فَأَبشِرُوا — وقتی افرادی مانند شما پدید آیند (که دین‌دار و آگاهند)، امیدوار باشید.', s:'امام صادق(ع)'},
+  {c:'aimma', t:'مَن حَفِظَ لِسانَه سَتَرَ اللهُ عَورَتَه — هر که زبان خود را نگاه دارد، خدا عیب او را می‌پوشاند.', s:'امام باقر(ع)'},
+  {c:'aimma', t:'اَلعَدلُ أساسٌ به قِوامُ العالَم — عدالت، اساسی است که پایداری جهان به آن است.', s:'امام علی(ع)'},
+  {c:'aimma', t:'التَّوَدُّدُ نِصفُ العَقل — دوستی‌ورزی با مردم، نیمی از خردمندی است.', s:'امام حسن مجتبی(ع)'},
+  {c:'rahbar', t:'اگر جوان‌ها بدانند چه سرمایه‌ی عظیمی به نام جوانی در اختیار دارند، هرگز آن را به رایگان از دست نمی‌دهند.', s:'رهبر انقلاب'},
+  {c:'rahbar', t:'همدلی و همزبانی مردم و مسئولان، رمز عبور از هر بحرانی است؛ این همدلی باید صادقانه و دوطرفه باشد.', s:'رهبر انقلاب'},
+  {c:'rahbar', t:'خانواده، اولین و مهم‌ترین دانشگاه تربیت انسان است؛ آنچه در خانواده شکل می‌گیرد، بر سراسر زندگی فرد اثر می‌گذارد.', s:'رهبر انقلاب'},
+  {c:'rahbar', t:'امید به آینده، نیروی محرکه‌ی هر ملتی است؛ نباید گذاشت یأس و ناامیدی در دل نسل جوان رخنه کند.', s:'رهبر انقلاب'},
+  {c:'shahid', t:'شهادت، دریچه‌ای است به سوی حیات جاودان؛ ما نمی‌میریم، بلکه به زندگی حقیقی منتقل می‌شویم.', s:'شهید محمد ابراهیم همت'},
+  {c:'shahid', t:'اگر بدانیم برای چه می‌جنگیم، هیچ سختی‌ای در برابر آن هدف بزرگ نمی‌ایستد.', s:'شهید حسین خرازی'},
+  {c:'shahid', t:'دنیا برای ما پلی است به آخرت؛ نباید در آن ماندگار شویم و از هدف اصلی غافل بمانیم.', s:'شهید مرتضی مطهری'},
+  {c:'shahid', t:'ایثار یعنی از خودت بگذری تا دیگری زندگی کند؛ این بالاترین درسی است که رزمندگان به ما آموختند.', s:'منسوب به شهدای دفاع مقدس'}
 ];
 function setSayingCat(cat){
   document.querySelectorAll('#screen-sayings .seg-control button').forEach(b=>b.classList.toggle('active', b.dataset.cat===cat));
@@ -3115,6 +3205,12 @@ const POEMS = [
   {p:'رهی معیری', t:'دلم گرفته ز غم های بی‌شمار، رها کن — بیا و بار غمم را ز دوش من بردار'},
   {p:'عارف قزوینی', t:'گر مرغ من از قفس بپرد چه عجب — بس مرغ که در قفس فسرد چه عجب'}
 ];
+function filterPoemChip(name, btn){
+  document.querySelectorAll('#screen-poems .seg-control button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('poemSearchInput').value = name;
+  renderPoems(name);
+}
 function renderPoems(query){
   const wrap = document.getElementById('poemsList');
   if(!wrap) return;
@@ -3346,23 +3442,23 @@ document.addEventListener('pointerdown', function(e){
 
 /* ============ NEWS SOURCES (13 credible outlets) ============ */
 const NEWS_SOURCES = [
+  {name:'پایگاه اطلاع‌رسانی رهبری', desc:'بیانات و اخبار رهبر انقلاب', domain:'leader.ir', url:'https://www.leader.ir'},
   {name:'خبرگزاری فارس', desc:'اخبار سیاسی، اجتماعی و فرهنگی', domain:'farsnews.ir', url:'https://www.farsnews.ir'},
   {name:'خبرگزاری تسنیم', desc:'تازه‌ترین اخبار روز', domain:'tasnimnews.com', url:'https://www.tasnimnews.com'},
   {name:'خبرگزاری ایرنا', desc:'خبرگزاری جمهوری اسلامی ایران', domain:'irna.ir', url:'https://www.irna.ir'},
   {name:'خبرگزاری مهر', desc:'اخبار عمومی و فرهنگی', domain:'mehrnews.com', url:'https://www.mehrnews.com'},
   {name:'خبرگزاری ایسنا', desc:'اخبار دانشگاهی و اجتماعی', domain:'isna.ir', url:'https://www.isna.ir'},
   {name:'روزنامه همشهری', desc:'اخبار شهری و اجتماعی', domain:'hamshahrionline.ir', url:'https://www.hamshahrionline.ir'},
-  {name:'شبکه خبر (اعتماد)', desc:'اخبار و تحلیل سیاسی', domain:'etemadonline.com', url:'https://www.etemadonline.com'},
   {name:'خبرگزاری حوزه', desc:'اخبار حوزه‌های علمیه', domain:'hawzahnews.com', url:'https://www.hawzahnews.com'},
   {name:'شبستان', desc:'اخبار دینی و مذهبی', domain:'shabestan.ir', url:'https://www.shabestan.ir'},
   {name:'خبرگزاری رسا', desc:'اخبار حوزه و روحانیت', domain:'rasanews.ir', url:'https://www.rasanews.ir'},
   {name:'العالم', desc:'اخبار بین‌الملل', domain:'alalamtv.net', url:'https://www.alalamtv.net'},
   {name:'الجزیره', desc:'اخبار جهانی', domain:'aljazeera.net', url:'https://www.aljazeera.net'},
-  {name:'خبرگزاری تسنیم', desc:'اخبار سیاسی و اجتماعی', domain:'tasnimnews.com', url:'https://www.tasnimnews.com'},
-  {name:'خبرگزاری فارس', desc:'اخبار سیاسی، اقتصادی و ورزشی', domain:'farsnews.ir', url:'https://www.farsnews.ir'},
   {name:'صدا و سیما (خبر)', desc:'اخبار رسمی صداوسیما', domain:'iribnews.ir', url:'https://www.iribnews.ir'},
   {name:'روزنامه کیهان', desc:'تحلیل و اخبار سیاسی', domain:'kayhan.ir', url:'https://kayhan.ir'},
-  {name:'خبرگزاری جمهوری اسلامی', desc:'پایگاه رسمی اطلاع‌رسانی', domain:'irna.ir', url:'https://www.irna.ir'},
+  {name:'روزنامه جوان', desc:'اخبار سیاسی و اجتماعی', domain:'javanonline.ir', url:'https://www.javanonline.ir'},
+  {name:'دفاع پرس', desc:'اخبار دفاعی و مقاومت', domain:'defapress.ir', url:'https://defapress.ir'},
+  {name:'خبرگزاری برنا', desc:'اخبار عمومی و اجتماعی', domain:'borna.news', url:'https://www.borna.news'},
   {name:'خبرآنلاین', desc:'اخبار عمومی و تحلیلی', domain:'khabaronline.ir', url:'https://www.khabaronline.ir'},
   {name:'باشگاه خبرنگاران جوان', desc:'اخبار عمومی و اجتماعی', domain:'yjc.ir', url:'https://www.yjc.ir'},
   {name:'العهد', desc:'اخبار مقاومت و منطقه', domain:'alahednews.com.lb', url:'https://www.alahednews.com.lb'},
@@ -3374,11 +3470,11 @@ function renderNews(query){
   const wrap = document.getElementById('newsList');
   if(!wrap) return;
   const list = NEWS_SOURCES.filter(s => !q || s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q));
+  wrap.className = 'news-grid-3';
   wrap.innerHTML = list.map(s => `
-    <div class="news-source" onclick="openNews('${s.url}')">
-      <div class="ns-icon"><img src="https://www.google.com/s2/favicons?sz=64&domain=${s.domain}" alt="" loading="lazy" onerror="this.style.display='none'"></div>
-      <div class="ns-text"><h4>${s.name}</h4><p>${s.desc}</p></div>
-      <div class="ns-go">مشاهده اخبار</div>
+    <div class="news-tile" onclick="openNews('${s.url}')">
+      <div class="nt-icon"><img src="https://www.google.com/s2/favicons?sz=64&domain=${s.domain}" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <span>${s.name}</span>
     </div>`).join('') || `<div class="empty-state"><h4>نتیجه‌ای پیدا نشد</h4></div>`;
 }
 
@@ -3566,19 +3662,38 @@ function initHomeCityPrompt(){
     loadHomePrayerPanel(ptSelectedCity);
     return;
   }
-  setTimeout(()=>{
-    const val = (window.prompt('برای نمایش اوقات شرعی، نام شهر خود را وارد کنید (مثلاً تهران، قم، مشهد):','تهران')||'').trim();
-    if(!val) return;
-    const match = PT_CITIES.find(c => c.name.includes(val) || val.includes(c.name));
-    const city = match || {group:'شهر شما', name:val, lat:35.70, lng:51.42, tz:'Asia/Tehran'};
-    selectPtCitySilent(city);
-  }, 900);
+  setTimeout(()=>{ openCityPromptModal(); }, 900);
+}
+function openCityPromptModal(){
+  const majorCities = PT_CITIES.filter(c => ['تهران','قم','مشهد','اصفهان','شیراز','کربلا','نجف','اهواز','کرج','تبریز'].includes(c.name));
+  openGlassModal('انتخاب شهر', `
+    <p style="font-size:11.5px; color:var(--text-sub); margin:0 0 14px 0; line-height:1.9;">برای نمایش اوقات شرعی دقیق، شهر خود را انتخاب کنید:</p>
+    <div class="city-quick-grid">
+      ${majorCities.map(c => `<div class="city-quick-chip" onclick='pickHomeCity(${JSON.stringify(c)})'>${c.name}</div>`).join('')}
+    </div>
+    <input id="cityPromptSearch" placeholder="یا نام شهر دیگری را تایپ کنید..." oninput="filterCityPromptSearch(this.value)" style="width:100%; margin-top:12px; padding:12px 14px; border-radius:12px; border:1px solid rgba(212,175,90,0.3); background:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; color:var(--text-main);">
+    <div id="cityPromptResults" style="margin-top:8px; max-height:160px; overflow-y:auto;"></div>
+  `);
+}
+function filterCityPromptSearch(q){
+  const wrap = document.getElementById('cityPromptResults');
+  q = (q||'').trim();
+  if(!q){ wrap.innerHTML=''; return; }
+  const filtered = PT_CITIES.filter(c => c.name.includes(q)).slice(0,8);
+  wrap.innerHTML = filtered.map(c => `<div class="city-quick-chip" style="width:100%; margin-bottom:6px;" onclick='pickHomeCity(${JSON.stringify(c)})'>${c.name}</div>`).join('') ||
+    `<div class="city-quick-chip" style="width:100%;" onclick='pickHomeCity({name:"${q}",lat:35.70,lng:51.42,tz:"Asia/Tehran"})'>استفاده از «${q}»</div>`;
+}
+function pickHomeCity(city){
+  ptSelectedCity = city;
+  localStorage.setItem('hy_pt_city', JSON.stringify(city));
+  closeGlassModal();
+  loadHomePrayerPanel(city);
 }
 async function loadHomePrayerPanel(city){
   const azanEl = document.getElementById('statNextAzan');
   const cityEl = document.getElementById('statAzanCity');
   if(!azanEl || !cityEl) return;
-  cityEl.textContent = city.name;
+  cityEl.textContent = 'در حال دریافت...';
   try{
     const todayStr = new Date().toISOString().slice(0,10);
     const url = `https://theshia.org/api/v1/prayer-times?lat=${city.lat}&lng=${city.lng}&method=Tehran&date=${todayStr}&tz=${encodeURIComponent(city.tz)}`;
@@ -3589,19 +3704,28 @@ async function loadHomePrayerPanel(city){
     const local = day.local || day;
     const order = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
     const now = new Date();
-    let next = null;
-    for(const key of order){
+    let chosenKey = null, chosenLabel = null, chosenTime = null;
+    for(const [key,label] of PT_LABELS){
+      if(!order.includes(key)) continue;
       const raw = local[key] || day[key];
       if(!raw) continue;
       const timeStr = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : raw;
       const [hh,mm] = timeStr.split(':').map(Number);
       const t = new Date(now); t.setHours(hh, mm, 0, 0);
-      if(t > now){ next = timeStr; break; }
+      if(t > now){ chosenKey=key; chosenLabel=label; chosenTime=timeStr; break; }
     }
-    azanEl.textContent = next || '--:--';
+    if(!chosenTime){
+      // all of today's times have passed — show tomorrow's fajr as the nearest upcoming
+      const raw = local['fajr'] || day['fajr'];
+      chosenLabel = 'اذان صبح (فردا)';
+      chosenTime = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : (raw || '--:--');
+    }
+    azanEl.textContent = chosenTime;
+    cityEl.textContent = `${chosenLabel} · ${city.name}`;
   }catch(err){
     console.error('home prayer panel fetch failed:', err);
     azanEl.textContent = '--:--';
+    cityEl.textContent = city.name;
   }
 }
 initHomeCityPrompt();
@@ -3624,9 +3748,23 @@ async function loadEconomyPrices(manual){
     const coinNim = find('nim_sekee') || find('نیم');
     const dollar = find('usd') || find('دلار');
     const goldGrid = document.getElementById('goldPriceGrid');
-    const dollarSpotlight = document.getElementById('dollarSpotlight');
+    const econTop3 = document.getElementById('econTop3');
     const gi = iconSvg('<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>');
     const ci = iconSvg('<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>');
+    const usdIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>';
+    const goldIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="1"/><path d="M12 7v10M2 12h20"/></svg>';
+    const coinIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>';
+    function t3Card(label, item, icon){
+      if(!item) return `<div class="econ-t3-card"><div class="t3-icon">${icon}</div><div class="t3-label">${label}</div><div class="t3-value">در دسترس نیست</div></div>`;
+      const chg = typeof item.change_percent === 'number' ? item.change_percent : (typeof item.change === 'number' ? item.change : null);
+      return `<div class="econ-t3-card"><div class="t3-icon">${icon}</div><div class="t3-label">${label}</div><div class="t3-value">${fmtToman(item.price)}</div>${chg!==null ? `<div class="t3-chg ${chg>=0?'up':'down'}">${chg>=0?'▲':'▼'} ${Math.abs(chg).toFixed(1)}٪</div>` : ''}</div>`;
+    }
+    if(econTop3){
+      econTop3.innerHTML =
+        t3Card('دلار آمریکا', dollar, usdIcon) +
+        t3Card('طلای ۱۸ عیار', gold18, goldIcon) +
+        t3Card('سکه تمام', coinEmami, coinIcon);
+    }
     if(goldGrid){
       goldGrid.innerHTML =
         priceCard('طلای ۱۸ عیار (گرم)', gold18 ? fmtToman(gold18.price) : 'نیازمند بروزرسانی', null, true, gi) +
@@ -3634,24 +3772,12 @@ async function loadEconomyPrices(manual){
         priceCard('نیم سکه', coinNim ? fmtToman(coinNim.price) : 'نیازمند بروزرسانی', null, true, ci) +
         priceCard('ربع سکه', coinRobe ? fmtToman(coinRobe.price) : 'نیازمند بروزرسانی', null, true, ci);
     }
-    if(dollarSpotlight){
-      if(dollar){
-        const chg = typeof dollar.change_percent === 'number' ? dollar.change_percent : (typeof dollar.change === 'number' ? dollar.change : null);
-        dollarSpotlight.innerHTML = `
-          <div class="ds-label">دلار آمریکا <span>USD/IRT</span></div>
-          <div class="ds-value">${fmtToman(dollar.price)}</div>
-          ${chg!==null ? `<div class="ds-chg ${chg>=0?'up':'down'}">${chg>=0?'▲':'▼'} ${Math.abs(chg).toFixed(2)}٪ نسبت به روز قبل</div>` : `<div class="ds-chg-neutral">تغییرات لحظه‌ای در دسترس نیست</div>`}
-          <div class="ds-foot">منبع: بازار آزاد ارز — به‌روزرسانی خودکار هر بار که این صفحه باز می‌شود</div>`;
-      } else {
-        dollarSpotlight.innerHTML = `<div class="ds-label">دلار آمریکا</div><div class="ds-value">نیازمند بروزرسانی</div>`;
-      }
-    }
   }catch(err){
     const goldGrid = document.getElementById('goldPriceGrid');
-    const dollarSpotlight = document.getElementById('dollarSpotlight');
+    const econTop3 = document.getElementById('econTop3');
     const note = `<div class="econ-note" style="grid-column:1/-1;">قیمت‌ها موقتاً در دسترس نیست، لطفاً بعداً دوباره تلاش کنید.</div>`;
     if(goldGrid) goldGrid.innerHTML = note;
-    if(dollarSpotlight) dollarSpotlight.innerHTML = `<div class="ds-label">دلار آمریکا</div><div class="ds-value">در حال حاضر در دسترس نیست</div>`;
+    if(econTop3) econTop3.innerHTML = note;
   }
   econLoaded = true;
   if(updated) updated.textContent = 'آخرین به‌روزرسانی: ' + new Date().toLocaleTimeString('fa-IR');
@@ -4499,15 +4625,16 @@ function runGoogleSearch(){
   closeSearchPanel();
 }
 
-/* ============ WHAT'S NEW panel — shown on every visit (Play Store style) ============ */
-const APP_VERSION = '1.1.5';
+/* ============ WHAT'S NEW panel — shown on EVERY visit (Play Store style) ============ */
+const APP_VERSION = '1.1.9';
 const WHATS_NEW = [
-  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'بخش تازه «اوقات شرعی»: اذان و نیمه‌شب شرعی برای هر شهر، با جست‌وجوی سریع و دسته‌بندی مرتب شهرها.'},
-  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'بخش‌های پرکاربرد (نماز، قرآن، موسیقی) بالاتر و در دسترس‌تر شدند؛ چیدمان صفحه اصلی منطقی‌تر شد.'},
-  {icon:'<path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/>', text:'لوگوی برنامه به‌روزرسانی شد؛ فونت عنوان‌ها یکدست‌تر و خواناتر شد.'},
-  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'بهینه‌سازی سرعت: کاهش افکت‌های سنگین بصری برای اجرای نرم‌تر روی گوشی‌های ضعیف‌تر.'},
-  {icon:'<circle cx="12" cy="12" r="3"/>', text:'ظاهر تم روشن و تیره کمی تازه‌تر و متعادل‌تر شد.'},
-  {icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>', text:'۱۰ آواتار آماده‌ی طلبگی و امکان انتخاب سریع پروفایل.'}
+  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'صفحه‌ی اصلی حالا یکی از اوقات شرعی واقعی شهر شما را به‌صورت تصادفی نمایش می‌دهد، نه فقط اذان بعدی.'},
+  {icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>', text:'انتخاب شهر با یک پنل شیشه‌ای زیبا و دسترسی سریع به شهرهای پرتردد انجام می‌شود.'},
+  {icon:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>', text:'بخش تازه «سخنرانی» با دسترسی مستقیم به محتوای صوتی/تصویری وعظین اضافه شد.'},
+  {icon:'<path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>', text:'اخبار حالا در قالب کارت‌های چیدمان ۳ در ۳ با منابع بیشتر نمایش داده می‌شود.'},
+  {icon:'<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>', text:'نمایش قیمت لحظه‌ای در تم تیره اصلاح شد و با ظاهر برنامه هماهنگ‌تر است.'},
+  {icon:'<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>', text:'مجموعه‌ی سخنان رهبری، شهدا و ائمه گسترش یافت و بخش تازه‌ی «اشعار» بر اساس شاعر دسته‌بندی شد.'},
+  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'رفع اشکالات جزئی، پاکسازی کدهای زائد و بهبود سرعت بارگذاری صفحات.'}
 ];
 function renderWhatsNew(){
   const list = document.getElementById('wnList');
@@ -4517,8 +4644,6 @@ function renderWhatsNew(){
   if(badge) badge.textContent = 'نسخه جدید ' + APP_VERSION.replace(/[0-9.]/g, d => '۰۱۲۳۴۵۶۷۸۹.'[('0123456789.').indexOf(d)]);
 }
 function openWhatsNew(force){
-  const seen = localStorage.getItem('hy_seen_version');
-  if(!force && seen === APP_VERSION) return;
   renderWhatsNew();
   document.getElementById('wnOverlay').classList.add('show');
   document.getElementById('wnPanel').classList.add('show');
@@ -4528,6 +4653,7 @@ function closeWhatsNew(){
   document.getElementById('wnOverlay').classList.remove('show');
   document.getElementById('wnPanel').classList.remove('show');
 }
+function showWhatsNewPanel(){ openWhatsNew(true); }
 
 
 /* ============ AVATAR OPTIONS (ready-made profile pictures) ============ */
@@ -4628,6 +4754,9 @@ applyProfileAvatar();
   setInterval(showToast, 20000);
 })();
 setTimeout(()=>{ const s=document.getElementById('splash'); if(s) s.classList.add('hide'); setTimeout(openWhatsNew, 400); }, 1500);
+window.scrollTo(0,0);
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('screen-home').classList.add('active');
 
 </script>
 </body>
