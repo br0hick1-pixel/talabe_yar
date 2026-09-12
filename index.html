@@ -1009,8 +1009,8 @@ h1,h2,h3,h4,p{font-family:inherit;}
 @media (prefers-reduced-motion: reduce){ .search-fab{animation:none;} }
 
 .search-overlay{
-  position:fixed; inset:0; background:rgba(10,20,15,0.45); z-index:198;
-  opacity:0; pointer-events:none; transition:opacity .3s ease; backdrop-filter:blur(2px);
+  position:fixed; inset:0; background:rgba(10,20,15,0.55); z-index:198;
+  opacity:0; pointer-events:none; transition:opacity .3s ease; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
 }
 .search-overlay.show{opacity:1; pointer-events:auto;}
 
@@ -1034,6 +1034,20 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .search-row{display:flex; align-items:center; gap:8px;}
 .search-row input{flex:1; min-width:0; border:1px solid var(--sage); background:var(--card); border-radius:14px; padding:13px 15px; font-family:inherit; font-size:13px; color:var(--text-main); outline:none;}
 .search-go{width:46px;height:46px;border-radius:13px; border:none; background:linear-gradient(135deg,var(--green),var(--green-deep)); color:#F7F3E9; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;}
+
+/* ---------- AI Assistant panel ---------- */
+.ai-fab{ background:linear-gradient(155deg,var(--gold),var(--green-deep)); }
+.ai-panel{ max-height:78vh; overflow-y:auto; }
+.ai-marja-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px; }
+.ai-marja-btn{ padding:12px 8px; border-radius:14px; border:1px solid var(--sage); background:var(--card); color:var(--text-main); font-family:inherit; font-size:12px; font-weight:600; cursor:pointer; }
+.ai-marja-btn:active{ background:var(--sage); }
+.ai-marja-tag{ display:inline-block; font-size:10.5px; font-weight:700; color:var(--green); background:rgba(34,147,106,0.12); padding:5px 10px; border-radius:10px; margin-bottom:10px; }
+.ai-chat-log{ max-height:36vh; overflow-y:auto; display:flex; flex-direction:column; gap:8px; margin-bottom:10px; padding-left:2px; }
+.ai-msg{ max-width:85%; padding:10px 13px; border-radius:14px; font-size:12.5px; line-height:1.8; }
+.ai-msg.user{ align-self:flex-end; background:linear-gradient(135deg,var(--green),var(--green-deep)); color:#F7F3E9; border-bottom-left-radius:4px; }
+.ai-msg.bot{ align-self:flex-start; background:var(--card); box-shadow:var(--shadow); border-bottom-right-radius:4px; }
+.ai-msg.bot.loading{ opacity:.7; }
+.ai-change-marja{ color:var(--green); font-weight:700; cursor:pointer; }
 [data-theme="dark"] .search-go{color:#0F1A15;}
 .search-go svg{width:19px;height:19px;}
 .search-hint{font-size:10.5px; color:var(--text-sub); margin-top:10px; line-height:1.8;}
@@ -1064,6 +1078,8 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .wn-sub{font-size:11.5px; color:var(--text-sub); margin:0 0 16px 0;}
 .wn-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
 .wn-list li{display:flex; align-items:flex-start; gap:10px; font-size:12.5px; line-height:1.8; color:var(--text-main);}
+.wn-list li.hl{ background:linear-gradient(135deg,rgba(210,162,74,0.16),rgba(34,147,106,0.10)); border:1px solid rgba(210,162,74,0.35); border-radius:14px; padding:10px 12px; font-weight:600; }
+.wn-list li.hl .wn-ic{ background:linear-gradient(155deg,var(--gold),var(--green-deep)); }
 .wn-list li .wn-ic{
   width:26px;height:26px;border-radius:9px; flex-shrink:0; margin-top:1px;
   background:linear-gradient(155deg,var(--green),var(--green-deep)); color:var(--gold-soft);
@@ -1295,6 +1311,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
         <div class="stat-chip"><b id="statClock">--:--</b><span>ساعت</span></div>
         <div class="stat-chip"><b id="statDate">--</b><span>تاریخ</span></div>
         <div class="stat-chip" onclick="go('prayertimes')" style="cursor:pointer;"><b id="statNextAzan">--:--</b><span id="statAzanCity">اذان بعدی</span></div>
+        <div class="stat-chip" onclick="go('prayertimes')" style="cursor:pointer;"><b id="statWeather">--°</b><span id="statWeatherCity">آب و هوا</span></div>
       </div>
     </div>
 
@@ -1527,17 +1544,18 @@ h1,h2,h3,h4,p{font-family:inherit;}
 
     <div class="section-title" style="margin-top:0;">آرشیو سخنرانی</div>
     <div class="seg-control" style="margin:0 0 12px 0;">
-      <button class="active" id="speechSrcBtn-iranseda" onclick="setSpeechSource('iranseda')">صدا و سیما</button>
-      <button id="speechSrcBtn-vaezin" onclick="setSpeechSource('vaezin')">واعظین</button>
+      <button class="active" id="speechSrcBtn-vaezin" onclick="setSpeechSource('vaezin')">واعظین</button>
+      <button id="speechSrcBtn-nava" onclick="setSpeechSource('nava')">نوا (منبر)</button>
+      <button id="speechSrcBtn-iranseda" onclick="setSpeechSource('iranseda')">صدا و سیما</button>
     </div>
     <div class="kashoob-toolbar">
       <button class="kt-btn" onclick="toggleSokhanraniSize()" id="sokhanraniExpandBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m11 0h3a2 2 0 002-2v-3"/></svg><span>بزرگ‌نمایی</span></button>
       <button class="kt-btn" onclick="toggleSokhanraniVisible()" id="sokhanraniHideBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a19.7 19.7 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a19.7 19.7 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24M1 1l22 22"/></svg><span>مخفی کردن</span></button>
     </div>
     <div class="kashoob-embed-wrap" id="sokhanraniWrap">
-      <iframe id="sokhanraniFrame" src="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe id="sokhanraniFrame" src="https://vaezin.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    <p style="font-size:10.5px; color:var(--text-sub); margin:8px 2px 16px 2px;" id="sokhanraniFallbackNote">این بخش آرشیو سخنرانی‌ها را به‌صورت زنده نمایش می‌دهد. اگر بارگذاری نشد، به‌دلیل محدودیت نمایش داخل برنامه توسط سایت مقصد است — <a id="sokhanraniExternalLink" href="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" target="_blank" style="color:var(--green); font-weight:700;">اینجا</a> در تب جدید باز کنید.</p>
+    <p style="font-size:10.5px; color:var(--text-sub); margin:8px 2px 16px 2px;" id="sokhanraniFallbackNote">این بخش آرشیو سخنرانی‌ها را به‌صورت زنده نمایش می‌دهد. اگر بارگذاری نشد، به‌دلیل محدودیت نمایش داخل برنامه توسط سایت مقصد است — <a id="sokhanraniExternalLink" href="https://vaezin.com/" target="_blank" style="color:var(--green); font-weight:700;">اینجا</a> در تب جدید باز کنید.</p>
 
     <div class="section-title">گزیده‌های کوتاه</div>
     <div id="speechesList"></div>
@@ -1924,23 +1942,38 @@ h1,h2,h3,h4,p{font-family:inherit;}
 
   <div class="toast" id="toast"></div>
 
-  <!-- ===================== SEARCH (Google redirect) ===================== -->
-  <button class="search-fab" id="searchFab" onclick="openSearchPanel()" aria-label="جست‌وجوی سؤال">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  <!-- ===================== AI ASSISTANT (شرعی) ===================== -->
+  <button class="search-fab ai-fab" id="searchFab" onclick="openSearchPanel()" aria-label="دستیار هوشمند شرعی">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z"/><path d="M5 14l.6 1.7L7.5 16l-1.9.6L5 18.5l-.6-1.9L2.5 16l1.9-.3L5 14z"/></svg>
   </button>
 
   <div class="search-overlay" id="searchOverlay" onclick="closeSearchPanel()"></div>
-  <div class="search-panel" id="searchPanel">
+  <div class="search-panel ai-panel" id="searchPanel">
     <div class="search-head">
-      <div class="sh-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-      <div><h4>جست‌وجوی سؤال</h4><p>سؤال خود را بنویسید تا در گوگل جست‌وجو شود</p></div>
+      <div class="sh-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/></svg></div>
+      <div><h4>دستیار هوشمند شرعی</h4><p id="aiHeadSub">راهنمای شما در پرسش‌های دینی و طلبگی</p></div>
       <button class="search-close" onclick="closeSearchPanel()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
-    <div class="search-row">
-      <input type="text" id="searchInput" placeholder="مثلاً: حکم غسل جنابت..." onkeydown="if(event.key==='Enter') runGoogleSearch()">
-      <button class="search-go" onclick="runGoogleSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+
+    <div id="aiStepMarja">
+      <p class="search-hint" style="margin:0 0 12px 0;">پیش از پرسش شرعی، بفرمایید بر اساس فتاوای کدام مرجع بررسی کنم:</p>
+      <div class="ai-marja-grid">
+        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله سیستانی')">آیت‌الله سیستانی</button>
+        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله خامنه‌ای')">آیت‌الله خامنه‌ای</button>
+        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله مکارم شیرازی')">آیت‌الله مکارم شیرازی</button>
+        <button class="ai-marja-btn" onclick="selectAiMarja('عمومی / نامشخص')">عمومی (بدون مرجع خاص)</button>
+      </div>
     </div>
-    <p class="search-hint">با تپ روی جست‌وجو، سؤال شما در تب جدید مرورگر روی گوگل جست‌وجو می‌شود. طلبه یار پاسخ شرعی تولید نمی‌کند؛ همیشه از منابع رسمی مرجع خود مطمئن شوید.</p>
+
+    <div id="aiStepChat" style="display:none;">
+      <div class="ai-marja-tag" id="aiMarjaTag"></div>
+      <div class="ai-chat-log" id="aiChatLog"></div>
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="سؤال خود را بنویسید..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+        <button class="search-go" onclick="sendAiMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <p class="search-hint">پاسخ‌های دستیار هوشمند جنبه‌ی راهنمایی اولیه دارد و جایگزین استفتاء مستقیم از دفتر مرجع نیست. <span class="ai-change-marja" onclick="resetAiMarja()">تغییر مرجع</span></p>
+    </div>
   </div>
 </div>
 
@@ -2454,16 +2487,19 @@ function toggleKashoobVisible(){
 let sokhanraniExpanded = false;
 let sokhanraniVisible = true;
 const SPEECH_SOURCES = {
-  iranseda: 'https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda',
-  vaezin: 'https://vaezin.com/'
+  vaezin: 'https://vaezin.com/',
+  nava: 'https://navaapp.com/menbar',
+  iranseda: 'https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda'
 };
 function setSpeechSource(key){
   const url = SPEECH_SOURCES[key];
   if(!url) return;
   document.getElementById('sokhanraniFrame').src = url;
   document.getElementById('sokhanraniExternalLink').href = url;
-  document.getElementById('speechSrcBtn-iranseda').classList.toggle('active', key==='iranseda');
-  document.getElementById('speechSrcBtn-vaezin').classList.toggle('active', key==='vaezin');
+  Object.keys(SPEECH_SOURCES).forEach(k => {
+    const btn = document.getElementById('speechSrcBtn-' + k);
+    if(btn) btn.classList.toggle('active', k===key);
+  });
 }
 function toggleSokhanraniSize(){
   sokhanraniExpanded = !sokhanraniExpanded;
@@ -3671,10 +3707,12 @@ function selectPtCitySilent(city){
   ptSelectedCity = city;
   localStorage.setItem('hy_pt_city', JSON.stringify(city));
   loadHomePrayerPanel(city);
+  loadHomeWeatherPanel(city);
 }
 function initHomeCityPrompt(){
   if(ptSelectedCity){
     loadHomePrayerPanel(ptSelectedCity);
+    loadHomeWeatherPanel(ptSelectedCity);
     return;
   }
   window._cityPromptWillOpen = true;
@@ -3710,7 +3748,37 @@ function pickHomeCity(city){
   localStorage.setItem('hy_pt_city', JSON.stringify(city));
   closeGlassModal();
   loadHomePrayerPanel(city);
+  loadHomeWeatherPanel(city);
   if(window._afterCityPrompt){ window._afterCityPrompt(); window._afterCityPrompt = null; }
+}
+// نگاشت کد وضعیت هوای Open-Meteo (WMO) به آیکون و برچسب فارسی
+const WEATHER_CODE_MAP = {
+  0:{icon:'☀️', label:'آفتابی'}, 1:{icon:'🌤️', label:'کمی ابری'}, 2:{icon:'⛅', label:'نیمه‌ابری'}, 3:{icon:'☁️', label:'ابری'},
+  45:{icon:'🌫️', label:'مه‌آلود'}, 48:{icon:'🌫️', label:'مه‌آلود'},
+  51:{icon:'🌦️', label:'نم‌نم باران'}, 53:{icon:'🌦️', label:'نم‌نم باران'}, 55:{icon:'🌦️', label:'نم‌نم باران'},
+  61:{icon:'🌧️', label:'بارانی'}, 63:{icon:'🌧️', label:'بارانی'}, 65:{icon:'🌧️', label:'باران شدید'},
+  71:{icon:'🌨️', label:'برفی'}, 73:{icon:'🌨️', label:'برفی'}, 75:{icon:'❄️', label:'برف شدید'},
+  80:{icon:'🌦️', label:'رگبار'}, 81:{icon:'🌦️', label:'رگبار'}, 82:{icon:'⛈️', label:'رگبار شدید'},
+  95:{icon:'⛈️', label:'رعد و برق'}, 96:{icon:'⛈️', label:'رعد و برق'}, 99:{icon:'⛈️', label:'رعد و برق شدید'}
+};
+async function loadHomeWeatherPanel(city){
+  const weatherEl = document.getElementById('statWeather');
+  const cityEl = document.getElementById('statWeatherCity');
+  if(!weatherEl || !cityEl) return;
+  try{
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&current=temperature_2m,weather_code&timezone=auto`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    const temp = Math.round(data.current?.temperature_2m);
+    const code = data.current?.weather_code;
+    const info = WEATHER_CODE_MAP[code] || {icon:'🌡️', label:'نامشخص'};
+    weatherEl.textContent = `${info.icon} ${temp}°`;
+    cityEl.textContent = city.name + ' — ' + info.label;
+  }catch(err){
+    console.error('weather fetch failed:', err);
+    cityEl.textContent = 'آب‌وهوا در دسترس نیست';
+  }
 }
 async function loadHomePrayerPanel(city){
   const azanEl = document.getElementById('statNextAzan');
@@ -4640,23 +4708,106 @@ renderOnlineMaddah();
 function openSearchPanel(){
   document.getElementById('searchOverlay').classList.add('show');
   document.getElementById('searchPanel').classList.add('show');
-  setTimeout(()=>document.getElementById('searchInput').focus(), 200);
+  setTimeout(()=>document.getElementById('searchInput')?.focus(), 200);
 }
 function closeSearchPanel(){
   document.getElementById('searchOverlay').classList.remove('show');
   document.getElementById('searchPanel').classList.remove('show');
 }
-function runGoogleSearch(){
-  const q = document.getElementById('searchInput').value.trim();
+
+/* ============ AI ASSISTANT — دستیار هوشمند شرعی (GapGPT — OpenAI-compatible) ============ */
+// ⚠️ کلید API را اینجا قرار دهید. توجه: قرار دادن کلید در کد سمت کاربر (client-side) یعنی
+// هر کسی که کد صفحه را ببیند می‌تواند کلید را بردارد و از اعتبار شما استفاده کند.
+// برای استفاده‌ی امن و واقعی، بهتر است یک سرور واسط (proxy) کوچک بسازید که کلید آنجا بماند
+// و این صفحه فقط با همان سرور شما صحبت کند. تا آن زمان، این پیاده‌سازی مستقیم است.
+const GAPGPT_API_KEY = 'sk-YvhQBBcbUcyi06i7TXzeIRdQO3CGd5LLiUNHZnJJn96zvROk'; // ⚠️ این کلید در کد سمت کاربر قابل مشاهده است — پایین توضیح داده شده
+const GAPGPT_ENDPOINT = 'https://api.gapgpt.app/v1/chat/completions';
+const GAPGPT_MODEL = 'gpt-4o';
+
+const AI_SYSTEM_PROMPT_BASE = `تو دستیار هوشمند اپلیکیشن «طلبه یار» هستی؛ اپی برای طلاب و علاقه‌مندان به معارف اسلامی که شامل بخش‌های قرآن، احادیث، سخنرانی، کتابخانه، اوقات شرعی و اخبار است.
+نقش تو: راهنمایی کاربر در سؤالات دینی، طلبگی، اخلاقی و عمومی مرتبط با حوزه، با لحنی محترمانه، آرام، دقیق و بدون ادعای مرجعیت فتوایی.
+قوانین مهم:
+۱. هرگز خودت را جای مرجع تقلید یا مفتی جا نزن؛ تو فقط راهنمایی اولیه می‌دهی.
+۲. برای هر پاسخ شرعی (احکام، غسل، نماز، روزه، خمس و مانند آن)، صریحاً بگو این پاسخ بر مبنای فتاوای عمومی و شناخته‌شده‌ی مرجع انتخابی کاربر است و کاربر را به استعلام مستقیم از رساله یا دفتر همان مرجع ارجاع بده.
+۳. اگر مطمئن نیستی یا فتوا بین مراجع اختلافی است، این اختلاف را صادقانه ذکر کن، نه اینکه یک نظر را قطعی جا بزنی.
+۴. لحن تو باید آرام، مؤدبانه و در حد و اندازه‌ی یک دستیار طلبگی امین باشد؛ از شوخی نامناسب یا قطعیت بی‌جا پرهیز کن.
+۵. پاسخ‌ها کوتاه، شمرده و قابل‌فهم باشند؛ از پاراگراف‌های خیلی طولانی پرهیز کن.
+۶. اگر سؤال کاربر ربطی به دین، اخلاق یا حوزه نداشت، بازهم مؤدبانه و مفید پاسخ بده، اما هویتت را (دستیار طلبه‌یار) حفظ کن.`;
+
+let aiSelectedMarja = null;
+let aiChatHistory = [];
+
+function selectAiMarja(marja){
+  aiSelectedMarja = marja;
+  document.getElementById('aiStepMarja').style.display = 'none';
+  document.getElementById('aiStepChat').style.display = 'block';
+  document.getElementById('aiMarjaTag').textContent = 'مرجع انتخابی: ' + marja;
+  document.getElementById('aiHeadSub').textContent = 'بر اساس فتاوای ' + marja;
+  aiChatHistory = [];
+  document.getElementById('aiChatLog').innerHTML = `<div class="ai-msg bot">سلام! سؤال شرعی یا طلبگی خودتون رو بپرسید — بر اساس فتاوای <b>${marja}</b> بررسی می‌کنم.</div>`;
+  setTimeout(()=>document.getElementById('searchInput')?.focus(), 150);
+}
+function resetAiMarja(){
+  aiSelectedMarja = null;
+  aiChatHistory = [];
+  document.getElementById('aiStepChat').style.display = 'none';
+  document.getElementById('aiStepMarja').style.display = 'block';
+  document.getElementById('aiHeadSub').textContent = 'راهنمای شما در پرسش‌های دینی و طلبگی';
+}
+function appendAiMsg(role, text){
+  const log = document.getElementById('aiChatLog');
+  const div = document.createElement('div');
+  div.className = 'ai-msg ' + (role==='user' ? 'user' : 'bot');
+  div.textContent = text;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+  return div;
+}
+async function sendAiMessage(){
+  const input = document.getElementById('searchInput');
+  const q = input.value.trim();
   if(!q) return;
-  window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
-  closeSearchPanel();
+  input.value = '';
+  appendAiMsg('user', q);
+  aiChatHistory.push({role:'user', content:q});
+  const loadingEl = appendAiMsg('bot', 'در حال بررسی...');
+  loadingEl.classList.add('loading');
+
+  if(!GAPGPT_API_KEY || GAPGPT_API_KEY === 'YOUR_GAPGPT_API_KEY'){
+    loadingEl.classList.remove('loading');
+    loadingEl.textContent = 'برای فعال شدن دستیار هوشمند، ابتدا باید کلید API از gapgpt.app دریافت و در تنظیمات کد جای‌گذاری شود.';
+    return;
+  }
+  try{
+    const systemMsg = AI_SYSTEM_PROMPT_BASE + (aiSelectedMarja ? `\nمرجع انتخابی کاربر برای این گفتگو: ${aiSelectedMarja}` : '');
+    const res = await fetch(GAPGPT_ENDPOINT, {
+      method:'POST',
+      headers:{ 'Authorization':'Bearer ' + GAPGPT_API_KEY, 'Content-Type':'application/json' },
+      body: JSON.stringify({
+        model: GAPGPT_MODEL,
+        messages: [{role:'system', content:systemMsg}, ...aiChatHistory],
+        max_tokens: 600
+      })
+    });
+    if(!res.ok) throw new Error('bad response ' + res.status);
+    const data = await res.json();
+    const answer = data.choices?.[0]?.message?.content || 'پاسخی دریافت نشد.';
+    loadingEl.classList.remove('loading');
+    loadingEl.textContent = answer;
+    aiChatHistory.push({role:'assistant', content:answer});
+  }catch(err){
+    console.error('AI assistant error:', err);
+    loadingEl.classList.remove('loading');
+    loadingEl.textContent = 'مشکلی در دریافت پاسخ پیش آمد. اتصال اینترنت یا کلید API را بررسی کنید.';
+  }
 }
 
 /* ============ WHAT'S NEW panel — shown on EVERY visit (Play Store style) ============ */
-const APP_VERSION = '1.2.0';
+const APP_VERSION = '1.3.0';
 const WHATS_NEW = [
-  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'صفحه‌ی اصلی حالا یکی از اوقات شرعی واقعی روز شما را به‌صورت تصادفی نمایش می‌دهد (نه همیشه فقط اذان بعدی).'},
+  {icon:'<path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/>', text:'✨ دستیار هوشمند شرعی اضافه شد! پیش از پاسخ، مرجع تقلید موردنظرتان را می‌پرسد و بر همان اساس راهنمایی می‌کند.', hl:true},
+  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'بخش سخنرانی به منابع پایدارتر (واعظین، نوا) مجهز شد تا همیشه در دسترس باشد.'},
+  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'آب‌وهوای لحظه‌ای شهر شما، کنار ساعت و اوقات شرعی در صفحه اصلی نمایش داده می‌شود.'},
   {icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>', text:'پنل انتخاب شهر بازطراحی شد و زودتر — پیش از اعلان تغییرات نسخه — نمایش داده می‌شود.'},
   {icon:'<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>', text:'اشکال نمایش قیمت‌های اقتصاد در تم تیره برطرف شد (متن روی پس‌زمینه تیره واقعاً خوانا شد).'},
   {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'رفع اشکال بارگذاری صفحه از موقعیت اسکرول اشتباه؛ برنامه اکنون همیشه از بالای صفحه شروع می‌شود.'}
@@ -4664,7 +4815,7 @@ const WHATS_NEW = [
 function renderWhatsNew(){
   const list = document.getElementById('wnList');
   if(!list) return;
-  list.innerHTML = WHATS_NEW.map(item => `<li><span class="wn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></span><span>${item.text}</span></li>`).join('');
+  list.innerHTML = WHATS_NEW.map(item => `<li class="${item.hl?'hl':''}"><span class="wn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></span><span>${item.text}</span></li>`).join('');
   const badge = document.querySelector('.wn-badge');
   if(badge) badge.textContent = 'نسخه جدید ' + APP_VERSION.replace(/[0-9.]/g, d => '۰۱۲۳۴۵۶۷۸۹.'[('0123456789.').indexOf(d)]);
 }
