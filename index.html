@@ -13,34 +13,34 @@
   src:local('Vazirmatn');
 }
 :root{
-  --cream:#FDFBF5;
-  --cream-deep:#F4EFDF;
-  --card:rgba(255,255,255,0.72);
-  --green-deep:#0B3226;
-  --green:#1E8058;
-  --green-soft:#5CA382;
-  --sage:#C3D9C8;
-  --gold:#C9973A;
-  --gold-soft:#EAD08A;
-  --text-main:#16241B;
-  --text-sub:#6F7E73;
-  --shadow:0 10px 26px rgba(15,61,46,0.09);
+  --cream:#FFFFFF;
+  --cream-deep:#F3F4F1;
+  --card:rgba(255,255,255,0.92);
+  --green-deep:#0C3A2C;
+  --green:#22936A;
+  --green-soft:#68B695;
+  --sage:#CFE3D3;
+  --gold:#D2A24A;
+  --gold-soft:#EDD59A;
+  --text-main:#182A1E;
+  --text-sub:#71806F;
+  --shadow:0 10px 26px rgba(15,61,46,0.08);
   --radius:20px;
   --nav-h:64px;
 }
 [data-theme="dark"]{
-  --cream:#12201A;
-  --cream-deep:#0C1712;
-  --card:rgba(24,42,34,0.55);
-  --green-deep:#EFE8D6;
-  --green:#7FBE9C;
-  --green-soft:#5E9C7A;
-  --sage:#2C4438;
-  --gold:#E4CE8F;
-  --gold-soft:#C9A24B;
-  --text-main:#F1EEE2;
-  --text-sub:#9DAFA3;
-  --shadow:0 10px 30px rgba(0,0,0,0.35);
+  --cream:#16241D;
+  --cream-deep:#101B15;
+  --card:rgba(28,46,38,0.55);
+  --green-deep:#F0E9D8;
+  --green:#82C2A0;
+  --green-soft:#649E7C;
+  --sage:#2E4A3B;
+  --gold:#E6D093;
+  --gold-soft:#CBA652;
+  --text-main:#F2EFE4;
+  --text-sub:#A3B4A7;
+  --shadow:0 10px 28px rgba(0,0,0,0.3);
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;height:100%;}
@@ -125,15 +125,6 @@ body{
   padding:6px 2px 18px 2px;
 }
 .brand{display:flex; align-items:center; gap:10px;}
-.logo-mark{
-  width:42px;height:42px; border-radius:14px;
-  background:linear-gradient(145deg,var(--green-deep),var(--green));
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:var(--shadow);
-  flex-shrink:0;
-}
-.logo-mark svg{width:24px;height:24px;}
-
 /* ---------- 3D Animated Dome Logo ---------- */
 .dome3d{ position:relative; display:flex; align-items:center; justify-content:center; }
 .dome3d .glow{
@@ -144,12 +135,11 @@ body{
 }
 @keyframes domeGlow{0%,100%{opacity:.55; transform:scale(1);} 50%{opacity:1; transform:scale(1.12);}}
 .dome3d svg{position:relative; z-index:2; filter:drop-shadow(0 4px 10px rgba(15,61,46,0.35));}
-.dome3d .flagpole{ transform-origin:0px 40px; animation:flagWave 2.6s ease-in-out infinite; }
 @keyframes flagWave{0%,100%{transform:rotate(0deg);}50%{transform:rotate(6deg);}}
 .dome3d.spin-slow{animation:domeSpin 10s linear infinite;}
 @keyframes domeSpin{from{transform:rotateY(0deg);}to{transform:rotateY(360deg);}}
 @media (prefers-reduced-motion: reduce){
-  .dome3d .glow, .dome3d .flagpole, .dome3d.spin-slow{animation:none;}
+  .dome3d .glow, .dome3d.spin-slow{animation:none;}
 }
 .brand-text .t1{font-size:17px; font-weight:700; color:var(--text-main); line-height:1.1; font-family:'Lalezar','Vazirmatn',sans-serif; letter-spacing:0.3px;}
 .brand-text .t2{font-size:11px; color:var(--text-sub); margin-top:2px;}
@@ -340,8 +330,8 @@ body{
   position:fixed; bottom:0; left:50%; transform:translateX(-50%);
   width:100%; max-width:480px; height:var(--nav-h);
   background:rgba(255,255,255,0.55);
-  backdrop-filter:blur(18px) saturate(160%);
-  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  backdrop-filter:blur(10px) saturate(150%);
+  -webkit-backdrop-filter:blur(10px) saturate(150%);
   box-shadow:0 -6px 24px rgba(15,61,46,0.10);
   border-top:1px solid rgba(255,255,255,0.6);
   display:flex; align-items:center; justify-content:space-around;
@@ -588,7 +578,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 /* ---------- Hadith of the day (compact glass, dismissible) ---------- */
 .hadith-of-day{
   position:fixed; top:70px; left:12px; z-index:400; width:min(78vw, 280px);
-  background:rgba(18,32,26,0.55); backdrop-filter:blur(16px) saturate(160%); -webkit-backdrop-filter:blur(16px) saturate(160%);
+  background:rgba(18,32,26,0.55); backdrop-filter:blur(10px) saturate(150%); -webkit-backdrop-filter:blur(10px) saturate(150%);
   border:1px solid rgba(201,162,75,0.35); border-radius:16px; padding:11px 14px;
   box-shadow:0 12px 28px rgba(0,0,0,0.25); color:#F7F3E9;
   transform:translateX(-115%); transition:transform .5s cubic-bezier(.2,.8,.2,1);
@@ -605,12 +595,12 @@ h1,h2,h3,h4,p{font-family:inherit;}
 /* ---------- Floating glass quick-nav strip ---------- */
 .quicknav-strip{
   position:relative; margin:14px 0 4px 0; overflow:visible; border-radius:18px;
-  background:rgba(255,255,255,0.78); backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+  background:rgba(255,255,255,0.78); backdrop-filter:blur(10px) saturate(150%); -webkit-backdrop-filter:blur(10px) saturate(150%);
   border:1px solid rgba(15,61,46,0.10); box-shadow:var(--shadow); padding:10px 0;
 }
 .hadith-toast{
   position:fixed; left:50%; bottom:88px; transform:translate(-50%,20px); width:min(92vw,380px); z-index:60;
-  background:rgba(255,255,255,0.55); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%);
+  background:rgba(255,255,255,0.55); backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
   border:1px solid rgba(255,255,255,0.5); border-radius:16px; padding:12px 14px; box-shadow:0 12px 30px rgba(0,0,0,0.25);
   opacity:0; pointer-events:none; transition:opacity .5s ease, transform .5s ease;
 }
@@ -633,7 +623,6 @@ h1,h2,h3,h4,p{font-family:inherit;}
 @media (prefers-reduced-motion: reduce){ .quicknav-track{ animation:none; overflow-x:auto; } }
 
 /* ---------- Screen header back button ---------- */
-.back-title{display:flex; align-items:center; gap:12px; margin-bottom:4px;}
 
 /* ---------- Splash ---------- */
 #splash{
@@ -698,7 +687,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .drawer-overlay.show{opacity:1; pointer-events:auto;}
 .side-drawer{
   position:fixed; top:10px; bottom:10px; right:-84%; width:76%; max-width:290px; z-index:199;
-  background:rgba(253,251,245,0.72); backdrop-filter:blur(44px) saturate(220%); -webkit-backdrop-filter:blur(44px) saturate(220%);
+  background:rgba(253,251,245,0.72); backdrop-filter:blur(18px) saturate(180%); -webkit-backdrop-filter:blur(18px) saturate(180%);
   box-shadow:0 30px 80px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.15), inset 0 0 0 1.5px rgba(212,175,90,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
   border-radius:28px;
   transition:right .38s cubic-bezier(.16,.9,.2,1), left .38s cubic-bezier(.16,.9,.2,1); overflow-y:auto;
@@ -739,7 +728,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
   transform:scale(0); animation:tapRipple .55s ease-out forwards; pointer-events:none; z-index:5;
 }
 @keyframes tapRipple{ to{ transform:scale(2.6); opacity:0; } }
-.feature-card, .news-source, .book-card, .row, .nav-item, .sd-item, .price-card, .grade-chip, .library-tab, .icon-btn, .dots-btn{ position:relative; overflow:hidden; }
+.feature-card, .news-source, .book-card, .row, .nav-item, .sd-item, .price-card, .grade-chip, .icon-btn, .dots-btn{ position:relative; overflow:hidden; }
 .nav-item.nav-home{ overflow:visible; }
 
 /* =========================================================
@@ -749,8 +738,8 @@ h1,h2,h3,h4,p{font-family:inherit;}
   position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
   width:calc(100% - 32px); max-width:420px; height:60px;
   background:rgba(255,255,255,0.62);
-  backdrop-filter:blur(20px) saturate(170%);
-  -webkit-backdrop-filter:blur(20px) saturate(170%);
+  backdrop-filter:blur(12px) saturate(150%);
+  -webkit-backdrop-filter:blur(12px) saturate(150%);
   box-shadow:0 14px 34px rgba(15,61,46,0.18), inset 0 0 0 1px rgba(255,255,255,0.5);
   border:1px solid rgba(255,255,255,0.5);
   display:flex; align-items:center; justify-content:space-around;
@@ -845,12 +834,28 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .econ-refresh.spin svg{animation:spin 0.8s linear infinite;}
 .econ-note{font-size:11px; color:var(--text-sub); line-height:1.8; background:var(--card); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); margin-top:6px;}
 
+/* ============ PRAYER TIMES (اوقات شرعی) ============ */
+.pt-city-list{ display:flex; flex-direction:column; gap:6px; max-height:60vh; overflow-y:auto; }
+.pt-city-item{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-radius:14px; background:var(--card); box-shadow:var(--shadow); cursor:pointer; }
+.pt-city-item b{ font-size:13px; font-weight:700; }
+.pt-city-item span{ font-size:10px; color:var(--text-sub); }
+.pt-group-label{ font-size:11px; font-weight:700; color:var(--gold-soft); margin:14px 2px 6px 2px; }
+.pt-city-header{ text-align:center; padding:16px; border-radius:18px; background:linear-gradient(135deg,var(--green),var(--green-deep)); color:#F7F3E9; margin-bottom:14px; box-shadow:var(--shadow); }
+.pt-city-header .pt-city-name{ font-size:16px; font-weight:700; }
+.pt-city-header .pt-date{ font-size:11px; opacity:.8; margin-top:4px; }
+.pt-times-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.pt-time-card{ background:var(--card); border-radius:14px; padding:12px; box-shadow:var(--shadow); text-align:center; }
+.pt-time-card.highlight{ background:linear-gradient(135deg,var(--sage),var(--green-soft)); box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4); }
+.pt-time-card b{ display:block; font-size:15px; font-weight:700; color:var(--text-main); margin-top:4px; }
+.pt-time-card span{ font-size:10.5px; color:var(--text-sub); }
+.pt-back-btn{ font-size:11px; color:var(--green); font-weight:700; cursor:pointer; margin-bottom:10px; display:inline-block; }
+
 /* =========================================================
    NEW: Library (Hawzah books)
 ========================================================= */
 .navasan-embed-wrap{
   border-radius:18px; overflow-x:auto; padding:10px; margin-bottom:14px;
-  background:rgba(255,255,255,0.35); backdrop-filter:blur(16px) saturate(160%); -webkit-backdrop-filter:blur(16px) saturate(160%);
+  background:rgba(255,255,255,0.35); backdrop-filter:blur(10px) saturate(150%); -webkit-backdrop-filter:blur(10px) saturate(150%);
   border:1px solid rgba(255,255,255,0.4); box-shadow:var(--shadow);
 }
 [data-theme="dark"] .navasan-embed-wrap{ background:rgba(18,32,26,0.45); border:1px solid rgba(255,255,255,0.08); }
@@ -868,7 +873,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .glass-modal-panel{
   width:100%; max-width:460px; margin-bottom:0; padding:22px 20px calc(env(safe-area-inset-bottom) + 22px) 20px;
   border-radius:26px 26px 0 0; position:relative;
-  background:rgba(253,251,245,0.68); backdrop-filter:blur(28px) saturate(180%); -webkit-backdrop-filter:blur(28px) saturate(180%);
+  background:rgba(253,251,245,0.68); backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%);
   border-top:1px solid rgba(255,255,255,0.5); box-shadow:0 -10px 40px rgba(0,0,0,0.25);
   transform:translateY(30px); transition:transform .35s cubic-bezier(.2,.85,.25,1);
 }
@@ -883,17 +888,6 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .ap-thumb{ width:48px;height:48px; border-radius:50%; overflow:hidden; }
 .ap-thumb svg{ width:100%; height:100%; }
 .avatar-preset-item span{ font-size:9px; color:var(--text-sub); }
-.hawzah-linkcard{
-  display:flex; align-items:center; gap:12px; padding:14px; margin:2px 0 16px 0; border-radius:18px; cursor:pointer;
-  background:linear-gradient(135deg,#1E8A9E,#0D3B44); color:#EAF7F8; box-shadow:var(--shadow); transition:transform .15s ease;
-}
-.hawzah-linkcard:active{transform:scale(0.97);}
-.hawzah-lc-icon{width:42px;height:42px;min-width:42px;border-radius:13px; background:rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
-.hawzah-lc-icon svg{width:20px;height:20px;}
-.hawzah-lc-text{flex:1; min-width:0;}
-.hawzah-lc-title{font-size:13.5px; font-weight:700;}
-.hawzah-lc-sub{font-size:10.5px; opacity:.85; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.hawzah-lc-arrow{width:16px;height:16px; flex-shrink:0; opacity:.8; transform:scaleX(-1);}
 .grade-chip{
   flex-shrink:0; padding:9px 16px; border-radius:14px; background:var(--card); box-shadow:var(--shadow);
   font-size:12px; font-weight:700; color:var(--text-sub); cursor:pointer; white-space:nowrap; border:1.5px solid transparent;
@@ -942,7 +936,6 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .lib-search svg{width:17px;height:17px; color:var(--text-sub); flex-shrink:0;}
 .lib-search input{border:none; outline:none; background:transparent; font-family:inherit; font-size:13px; color:var(--text-main); flex:1; min-width:0;}
 .lib-count{font-size:11px; color:var(--text-sub); margin-bottom:12px;}
-.lib-group-title{font-size:12.5px; font-weight:700; color:var(--green); margin:16px 2px 10px 2px;}
 
 /* =========================================================
    NEW: SEARCH ASSISTANT (floating button -> Google search)
@@ -968,7 +961,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .search-panel{
   position:fixed; left:0; right:0; bottom:0; z-index:199; max-width:480px; margin:0 auto;
   border-radius:24px 24px 0 0;
-  background:rgba(253,251,245,0.92); backdrop-filter:blur(22px) saturate(170%); -webkit-backdrop-filter:blur(22px) saturate(170%);
+  background:rgba(253,251,245,0.92); backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
   box-shadow:0 -14px 40px rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.5); border-bottom:none;
   transform:translateY(105%); transition:transform .32s cubic-bezier(.2,.85,.25,1);
   padding:18px 18px calc(20px + env(safe-area-inset-bottom)) 18px;
@@ -999,7 +992,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .wn-panel{
   position:fixed; left:0; right:0; bottom:0; z-index:499; max-width:480px; margin:0 auto;
   border-radius:24px 24px 0 0; max-height:78vh; overflow-y:auto;
-  background:rgba(253,251,245,0.6); backdrop-filter:blur(26px) saturate(180%); -webkit-backdrop-filter:blur(26px) saturate(180%);
+  background:rgba(253,251,245,0.6); backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%);
   box-shadow:0 -16px 44px rgba(0,0,0,0.28); border:1px solid rgba(255,255,255,0.35); border-bottom:none;
   transform:translateY(105%); transition:transform .35s cubic-bezier(.2,.85,.25,1);
   padding:20px 20px calc(22px + env(safe-area-inset-bottom)) 20px;
@@ -1026,8 +1019,6 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .wn-btn{flex:1; padding:13px; border-radius:14px; border:none; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;}
 .wn-btn.primary{background:linear-gradient(135deg,var(--green),var(--green-deep)); color:#F7F3E9;}
 [data-theme="dark"] .wn-btn.primary{color:#0F1A15;}
-.wn-btn.ghost{background:rgba(255,255,255,0.35); color:var(--text-main);}
-[data-theme="dark"] .wn-btn.ghost{ background:rgba(255,255,255,0.08); }
 .wn-close{position:absolute; top:14px; left:14px; width:30px;height:30px;border-radius:50%; border:none; background:rgba(255,255,255,0.35); color:var(--text-sub); display:flex; align-items:center; justify-content:center; cursor:pointer;}
 [data-theme="dark"] .wn-close{ background:rgba(255,255,255,0.08); }
 .wn-close svg{width:14px;height:14px;}
@@ -1038,7 +1029,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .sticky-brand{
   position:fixed; top:calc(env(safe-area-inset-top) + 10px); left:10px; z-index:150;
   display:flex; align-items:center; gap:6px; padding:5px 10px 5px 6px; border-radius:20px;
-  background:rgba(253,251,245,0.72); backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+  background:rgba(253,251,245,0.72); backdrop-filter:blur(10px) saturate(150%); -webkit-backdrop-filter:blur(10px) saturate(150%);
   box-shadow:0 8px 20px rgba(0,0,0,0.15); border:1px solid rgba(255,255,255,0.4);
   opacity:0; pointer-events:none; transform:translateY(-6px); transition:opacity .25s ease, transform .25s ease;
 }
@@ -1163,12 +1154,17 @@ h1,h2,h3,h4,p{font-family:inherit;}
   </div>
   <div class="sd-item" onclick="closeDrawer(); go('sayings');">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-    <span>سخن زیبا</span>
+    <span>روایت</span>
     <svg class="sd-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
   </div>
   <div class="sd-item" onclick="closeDrawer(); go('imams');">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg>
     <span>چهارده معصوم</span>
+    <svg class="sd-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="sd-item" onclick="closeDrawer(); go('poems');">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M8 7h8M8 11h5"/></svg>
+    <span>شعر</span>
     <svg class="sd-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
   </div>
 
@@ -1242,7 +1238,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
       <div class="stat-row">
         <div class="stat-chip"><b id="statClock">--:--</b><span>ساعت</span></div>
         <div class="stat-chip"><b id="statDate">--</b><span>تاریخ</span></div>
-        <div class="stat-chip"><b id="statJuz">۱</b><span>جزء اخیر</span></div>
+        <div class="stat-chip" onclick="go('prayertimes')" style="cursor:pointer;"><b id="statNextAzan">--:--</b><span id="statAzanCity">اذان بعدی</span></div>
       </div>
     </div>
 
@@ -1254,6 +1250,11 @@ h1,h2,h3,h4,p{font-family:inherit;}
 
     <div class="section-title">دسترسی سریع</div>
     <div class="card-grid">
+      <div class="feature-card accent-rose" onclick="go('prayertimes')">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3>اوقات شرعی</h3>
+        <p>اذان و نیمه‌شب شرعی — انتخاب شهر</p>
+      </div>
       <div class="feature-card accent-gold" onclick="go('music')">
         <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <h3>پخش موسیقی و مداحی</h3>
@@ -1304,7 +1305,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
       </div>
       <div class="feature-card accent-rose" onclick="go('sayings')">
         <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <h3>سخن زیبا</h3>
+        <h3>روایت</h3>
         <p>روایات نورانی اهل‌بیت</p>
       </div>
       <div class="feature-card accent-wine" onclick="go('imams')">
@@ -1316,6 +1317,11 @@ h1,h2,h3,h4,p{font-family:inherit;}
         <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <h3>موسیقی و مداحی</h3>
         <p>کتابخانه صوتی شما</p>
+      </div>
+      <div class="feature-card accent-teal" onclick="go('poems')">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M8 7h8M8 11h5"/></svg></div>
+        <h3>شعر</h3>
+        <p>۱۰۰ شعر و بیت ماندگار فارسی</p>
       </div>
     </div>
 
@@ -1330,15 +1336,27 @@ h1,h2,h3,h4,p{font-family:inherit;}
       <div style="width:40px;"></div>
     </div>
 
-    <div class="section-title" style="margin-top:0;">مطالعه و معارف</div>
+    <div class="section-title" style="margin-top:0;">نماز و عبادت</div>
     <div class="card-grid">
+      <div class="feature-card accent-rose" onclick="go('prayertimes')">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3>اوقات شرعی</h3><p>اذان و نیمه‌شب — انتخاب شهر</p>
+      </div>
       <div class="feature-card accent-gold" onclick="go('quran')">
         <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg></div>
         <h3>قرآن</h3><p>تلاوت جزء به جزء</p>
       </div>
+    </div>
+
+    <div class="section-title">مطالعه و معارف</div>
+    <div class="card-grid">
       <div class="feature-card accent-rose" onclick="go('sayings')">
         <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <h3>سخن زیبا</h3><p>روایات نورانی</p>
+        <h3>روایت</h3><p>روایات نورانی</p>
+      </div>
+      <div class="feature-card accent-teal" onclick="go('poems')">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M8 7h8M8 11h5"/></svg></div>
+        <h3>شعر</h3><p>۱۰۰ شعر مشهور فارسی</p>
       </div>
       <div class="feature-card accent-wine" onclick="go('imams')">
         <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg></div>
@@ -1408,7 +1426,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
   <section class="screen" id="screen-sayings">
     <div class="topbar">
       <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">سخن زیبا</div><div class="t2">روایات نورانی و کلام بزرگان</div></div>
+      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">روایت</div><div class="t2">روایات نورانی و کلام بزرگان</div></div>
       <div style="width:40px;"></div>
     </div>
     <div class="seg-control" style="margin:0 0 16px 0; overflow-x:auto; white-space:nowrap; display:flex;">
@@ -1421,6 +1439,20 @@ h1,h2,h3,h4,p{font-family:inherit;}
     <div id="sayingsList"></div>
   </section>
 
+  <!-- ===================== POEMS / شعر ===================== -->
+  <section class="screen" id="screen-poems">
+    <div class="topbar">
+      <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">شعر</div><div class="t2">۱۰۰ بیت و شعر ماندگار فارسی</div></div>
+      <div style="width:40px;"></div>
+    </div>
+    <div class="lib-search" style="margin-bottom:12px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="poemSearchInput" placeholder="جستجو بر اساس نام شاعر..." oninput="renderPoems(this.value)">
+    </div>
+    <div id="poemsList"></div>
+  </section>
+
   <!-- ===================== SHORT SPEECHES ===================== -->
   <section class="screen" id="screen-speeches">
     <div class="topbar">
@@ -1428,6 +1460,18 @@ h1,h2,h3,h4,p{font-family:inherit;}
       <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">سخنرانی کوتاه</div><div class="t2">گزیده‌ی کلام بزرگان</div></div>
       <div style="width:40px;"></div>
     </div>
+
+    <div class="section-title" style="margin-top:0;">آرشیو سخنرانی — صدا و سیما</div>
+    <div class="kashoob-toolbar">
+      <button class="kt-btn" onclick="toggleSokhanraniSize()" id="sokhanraniExpandBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m11 0h3a2 2 0 002-2v-3"/></svg><span>بزرگ‌نمایی</span></button>
+      <button class="kt-btn" onclick="toggleSokhanraniVisible()" id="sokhanraniHideBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a19.7 19.7 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a19.7 19.7 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24M1 1l22 22"/></svg><span>مخفی کردن</span></button>
+    </div>
+    <div class="kashoob-embed-wrap" id="sokhanraniWrap">
+      <iframe id="sokhanraniFrame" src="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p style="font-size:10.5px; color:var(--text-sub); margin:8px 2px 16px 2px;">این بخش آرشیو سخنرانی‌های سایت صدا و سیما (سخنرانی) را به‌صورت زنده نمایش می‌دهد. اگر بارگذاری نشد، به‌دلیل محدودیت نمایش داخل برنامه توسط سایت مقصد است — <a href="https://sokhanrani.iranseda.ir/categorylist/?VALID=TRUE&c=eda" target="_blank" style="color:var(--green); font-weight:700;">اینجا</a> در تب جدید باز کنید.</p>
+
+    <div class="section-title">گزیده‌های کوتاه</div>
     <div id="speechesList"></div>
   </section>
 
@@ -1528,6 +1572,26 @@ h1,h2,h3,h4,p{font-family:inherit;}
   </section>
 
   <!-- ===================== ECONOMY ===================== -->
+  <section class="screen" id="screen-prayertimes">
+    <div class="topbar">
+      <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">اوقات شرعی</div><div class="t2">اذان و نیمه‌شب شرعی — روش جعفری</div></div>
+      <div style="width:40px;"></div>
+    </div>
+
+    <div class="lib-search" style="margin-bottom:10px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="ptCitySearch" placeholder="جستجوی شهر (مثلاً مشهد، قم، کربلا...)" oninput="renderPtCityList(this.value)">
+    </div>
+    <div id="ptCityList" class="pt-city-list"></div>
+
+    <div id="ptResult" style="display:none;">
+      <div class="pt-city-header" id="ptCityHeader"></div>
+      <div class="pt-times-grid" id="ptTimesGrid"></div>
+      <div class="econ-note" style="margin-top:10px;">محاسبات بر اساس روش جعفری (شیعی) از سرویس عمومی <a href="https://theshia.org" target="_blank" style="color:var(--green); font-weight:700;">theshia.org</a> دریافت می‌شود.</div>
+    </div>
+  </section>
+
   <section class="screen" id="screen-economy">
     <div class="topbar">
       <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
@@ -1652,7 +1716,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
       </div>
       <div class="row" onclick="showAbout()">
         <div class="row-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
-        <div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۱.۰</div></div>
+        <div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۱.۵</div></div>
         <div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div>
       </div>
     </div>
@@ -1719,7 +1783,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
 
     <div class="settings-group">
       <div class="sg-title">درباره برنامه</div>
-      <div class="row" onclick="showAbout()"><div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۱.۰</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
+      <div class="row" onclick="showAbout()"><div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۱.۵</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
       <div class="row" onclick="shareApp()" style="border-top:1px solid var(--cream-deep);"><div class="row-info"><div class="r1">اشتراک‌گذاری برنامه</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
       <div class="row" onclick="reportProblem()" style="border-top:1px solid var(--cream-deep);"><div class="row-info"><div class="r1">گزارش مشکل</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
     </div>
@@ -1816,7 +1880,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
   <div class="wn-overlay" id="wnOverlay" onclick="closeWhatsNew()"></div>
   <div class="wn-panel" id="wnPanel">
     <button class="wn-close" onclick="closeWhatsNew()" aria-label="بستن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    <span class="wn-badge">نسخه جدید ۱.۱.۰</span>
+    <span class="wn-badge">نسخه جدید ۱.۱.۵</span>
     <div class="wn-title">چه چیزهایی تازه شده؟</div>
     <p class="wn-sub">خلاصه‌ای از تغییرات و بهبودهای این به‌روزرسانی</p>
     <ul class="wn-list" id="wnList"></ul>
@@ -2168,12 +2232,14 @@ function go(name){
   if(name==='home') renderHomeRecent();
   if(name==='profile') renderProfileCustomization();
   if(name==='sayings') renderSayings();
+  if(name==='poems') renderPoems();
   if(name==='speeches') renderSpeeches();
   if(name==='imams') renderImams();
   if(name==='quran' && !quranLoaded) loadQuranJuz(currentJuz);
   if(name==='news') renderNews();
   if(name==='library') renderLibrary();
   if(name==='economy') loadEconomyPrices(false);
+  if(name==='prayertimes') renderPtCityList('');
 }
 function openImam(id){
   renderImamDetail(id);
@@ -2307,6 +2373,24 @@ function toggleKashoobVisible(){
   const btn = document.getElementById('kashoobHideBtn');
   wrap.classList.toggle('collapsed', !kashoobVisible);
   if(btn) btn.querySelector('span').textContent = kashoobVisible ? 'مخفی کردن' : 'نمایش';
+}
+
+/* ============ SOKHANRANI (سخنرانی) EMBED — resize / hide controls ============ */
+let sokhanraniExpanded = false;
+let sokhanraniVisible = true;
+function toggleSokhanraniSize(){
+  sokhanraniExpanded = !sokhanraniExpanded;
+  const wrap = document.getElementById('sokhanraniWrap');
+  const btn = document.getElementById('sokhanraniExpandBtn');
+  wrap.classList.toggle('expanded', sokhanraniExpanded);
+  if(btn) btn.querySelector('span').textContent = sokhanraniExpanded ? 'اندازه عادی' : 'بزرگ‌نمایی';
+}
+function toggleSokhanraniVisible(){
+  sokhanraniVisible = !sokhanraniVisible;
+  const wrap = document.getElementById('sokhanraniWrap');
+  const btn = document.getElementById('sokhanraniHideBtn');
+  wrap.classList.toggle('collapsed', !sokhanraniVisible);
+  if(btn) btn.querySelector('span').textContent = sokhanraniVisible ? 'مخفی کردن' : 'نمایش';
 }
 
 /* ============ ONLINE HAWZAH LIBRARY LINK CARD ============ */
@@ -2742,13 +2826,14 @@ function reportProblem(){
   window.location.href = 'mailto:'+email+'?subject='+encodeURIComponent('گزارش مشکل - طلبه یار')+'&body='+encodeURIComponent('لطفاً مشکل یا پیشنهاد خود را اینجا بنویسید:\n\n');
 }
 function showAbout(){
-  alert('طلبه یار — نسخه ۱.۱.۰\nهمراه همیشگی شما در مسیر طلبگی\n\nبرنامه‌ای برای پخش موسیقی محلی، دسترسی به اخبار معتبر و آرامش روزانه.');
+  alert('طلبه یار — نسخه ۱.۱.۵\nهمراه همیشگی شما در مسیر طلبگی\n\nبرنامه‌ای برای پخش موسیقی محلی، دسترسی به اخبار معتبر و آرامش روزانه.');
 }
 
 /* ============ QUICKNAV MARQUEE ============ */
 const QUICKNAV_ITEMS = [
   {label:'قرآن', screen:'quran', icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M6.5 17H20v3H6.5A2.5 2.5 0 014 17.5"/>'},
-  {label:'سخن زیبا', screen:'sayings', icon:'<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>'},
+  {label:'روایت', screen:'sayings', icon:'<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>'},
+  {label:'شعر', screen:'poems', icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M8 7h8M8 11h5"/>'},
   {label:'چهارده معصوم', screen:'imams', icon:'<path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/>'},
   {label:'کتابخانه', screen:'library', icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>'},
   {label:'اخبار', screen:'news', icon:'<path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>'},
@@ -2920,6 +3005,126 @@ function setSayingCat(cat){
   wrap.dataset.rendered = '';
   renderSayings(cat);
 }
+/* ============ POEMS (شعر) — 100 famous classical Persian verses ============ */
+const POEMS = [
+  {p:'حافظ', t:'بنی‌آدم اعضای یک پیکرند — که در آفرینش ز یک گوهرند'},
+  {p:'سعدی', t:'بنی‌آدم اعضای یکدیگرند — که در آفرینش ز یک گوهرند\nچو عضوی به‌درد آورد روزگار — دگر عضوها را نماند قرار'},
+  {p:'سعدی', t:'تو کز محنت دیگران بی‌غمی — نشاید که نامت نهند آدمی'},
+  {p:'حافظ', t:'الا یا ایها الساقی ادر کاسا و ناولها — که عشق آسان نمود اول ولی افتاد مشکل‌ها'},
+  {p:'حافظ', t:'یوسف گم‌گشته بازآید به کنعان غم مخور — کلبه احزان شود روزی گلستان غم مخور'},
+  {p:'حافظ', t:'دلا نزد کسی بنشین که او از دل خبر دارد — به زیر آن درختی رو که او گل بیشتر دارد'},
+  {p:'حافظ', t:'سال‌ها دل طلب جام جم از ما می‌کرد — وان چه خود داشت ز بیگانه تمنا می‌کرد'},
+  {p:'حافظ', t:'من همان دم که وضو ساختم از چشمه عشق — چار تکبیر زدم یک‌سره بر هر چه که هست'},
+  {p:'حافظ', t:'مزرع سبز فلک دیدم و داس مه نو — یادم از کِشته خویش آمد و هنگام درو'},
+  {p:'حافظ', t:'در این زمانه رفیقی که خالی از خلل است — صراحی می ناب و سفینه غزل است'},
+  {p:'حافظ', t:'دوش وقت سحر از غصه نجاتم دادند — واندر آن ظلمت شب آب حیاتم دادند'},
+  {p:'حافظ', t:'اگر آن ترک شیرازی به دست آرد دل ما را — به خال هندویش بخشم سمرقند و بخارا را'},
+  {p:'حافظ', t:'ساقی به نور باده برافروز جام ما — مطرب بگو که کار جهان شد به کام ما'},
+  {p:'حافظ', t:'صبحدم مرغ چمن با گل نوخاسته گفت — ناز کم کن که در این باغ بسی چون تو شکفت'},
+  {p:'حافظ', t:'گر ز دست زلف مشکینت خطایی رفت رفت — ور ز هندوی شما بر ما جفایی رفت رفت'},
+  {p:'حافظ', t:'خیز تا خرقه صوفی به خرابات بریم — شطح و طامات به بازار خرافات بریم'},
+  {p:'حافظ', t:'عمریست تا دلم طلب جام جم کند — وان چه خود داشت از بیگانه تمنا می‌کند'},
+  {p:'حافظ', t:'هرگز نمیرد آن که دلش زنده شد به عشق — ثبت است بر جریده عالم دوام ما'},
+  {p:'حافظ', t:'خوش است خلوت اگر یار یار من باشد — نه من بسوزم و او شمع انجمن باشد'},
+  {p:'حافظ', t:'دی می‌شدم به گوشه میخانه در سحر — بشنیدم از میانه گلبانگ ساز و در'},
+  {p:'سعدی', t:'گر دست دهد خاک کف پای نگارم — بر لوح بصر خط غباری بنگارم'},
+  {p:'سعدی', t:'باران رحمت بی‌حسابت همه را رسیده و خوان نعمت بی‌دریغت همه‌جا کشیده'},
+  {p:'سعدی', t:'هر که نامخت از گذشت روزگار — نیز ناموزد ز هیچ آموزگار'},
+  {p:'سعدی', t:'به جهان خرم از آنم که جهان خرم از اوست — عاشقم بر همه عالم که همه عالم از اوست'},
+  {p:'سعدی', t:'موری به زیر پای من افتاده بود، مست — من دست بازداشتمش، گفت خوش نشست'},
+  {p:'سعدی', t:'درخت تو گر بار دانش بگیرد — به زیر آوری چرخ نیلوفری را'},
+  {p:'سعدی', t:'هزار جهد بکردم که سر عشق بپوشم — نبود بر سر آتش میسرم که نجوشم'},
+  {p:'سعدی', t:'ای که پنجاه رفت و در خوابی — مگر این پنج روز دریابی'},
+  {p:'سعدی', t:'عاقلان دانند که مجنون خیال بسته بست — لیک نتوان گفت مجنون را که رنجورست و بس'},
+  {p:'سعدی', t:'هر که عیب دگران پیش تو آورد و شمرد — بی‌گمان عیب تو پیش دگران خواهد برد'},
+  {p:'مولوی', t:'بشنو از نی چون حکایت می‌کند — از جدایی‌ها شکایت می‌کند'},
+  {p:'مولوی', t:'ای عاشقان ای عاشقان امروز ماییم و شما — افتاده در دام غمت دیوانه و شیدا شما'},
+  {p:'مولوی', t:'هر کسی کو دور ماند از اصل خویش — باز جوید روزگار وصل خویش'},
+  {p:'مولوی', t:'گفت پیغمبر که چون کوبی دری — عاقبت زان در برون آید سری'},
+  {p:'مولوی', t:'در دل من مهر تو چون کوه بود — در غم عشقت مرا اندوه بود'},
+  {p:'مولوی', t:'روزها فکر من این است و همه شب سخنم — که چرا غافل از احوال دل خویشتنم'},
+  {p:'مولوی', t:'هر که را جامه ز عشقی چاک شد — او ز حرص و عیب کلی پاک شد'},
+  {p:'مولوی', t:'عاشقی گر زین سر و گر زان سر است — عاقبت ما را بدان سر رهبر است'},
+  {p:'مولوی', t:'مرده بودم زنده شدم، گریه بودم خنده شدم — دولت عشق آمد و من دولت پاینده شدم'},
+  {p:'مولوی', t:'بیا بیا که تو ما را بهانه‌ای دیگر — دلم گرفته و در سینه خانه‌ای دیگر'},
+  {p:'خیام', t:'این قافله عمر عجب می‌گذرد — دریاب دمی که با طرب می‌گذرد'},
+  {p:'خیام', t:'یک چند به کودکی به استاد شدیم — یک چند به استادی خود شاد شدیم'},
+  {p:'خیام', t:'از دی که گذشت هیچ ازو یاد مکن — فردا که نیامده است فریاد مکن'},
+  {p:'خیام', t:'می خوردن و شاد بودن آیین من است — فارغ‌بودن ز کفر و دین دین من است'},
+  {p:'خیام', t:'برخیز و مخور غم جهان گذران — بنشین و دمی به شادمانی گذران'},
+  {p:'خیام', t:'ابر آمد و باز بر سر سبزه گریست — بی باده گلرنگ نمی‌باید زیست'},
+  {p:'خیام', t:'هر ذره که در خاک زمینی بوده است — پیش از من و تو تاجی و نگینی بوده است'},
+  {p:'خیام', t:'در دایره‌ای کامدن و رفتن ماست — آن را نه بدایت نه نهایت پیداست'},
+  {p:'خیام', t:'ای دوست بیا تا غم فردا نخوریم — وین یکدم عمر را غنیمت شمریم'},
+  {p:'خیام', t:'چون عاقبت کار جهان نیستی است — انگار که نیستی، چو هستی، چیست'},
+  {p:'فردوسی', t:'بسی رنج بردم در این سال سی — عجم زنده کردم بدین پارسی'},
+  {p:'فردوسی', t:'توانا بود هر که دانا بود — ز دانش دل پیر برنا بود'},
+  {p:'فردوسی', t:'میازار موری که دانه‌کش است — که جان دارد و جان شیرین خوش است'},
+  {p:'فردوسی', t:'چو ایران نباشد تن من مباد — بدین بوم و بر زنده یک تن مباد'},
+  {p:'فردوسی', t:'به نام خداوند جان و خرد — کزین برتر اندیشه برنگذرد'},
+  {p:'فردوسی', t:'ز نیرو بود مرد را راستی — ز سستی کژی زاید و کاستی'},
+  {p:'فردوسی', t:'جهان یادگار است و ما رفتنی — به گیتی نماند به جز مردمی'},
+  {p:'نظامی', t:'مسلمانان مسلمانان خبر دار — که ما را نیست غیر از یک خبردار'},
+  {p:'نظامی', t:'به نام آفریننده جان و خرد — که این برتر از پایه گفت و شنید'},
+  {p:'عطار', t:'مرغ جانم چون هما پرواز کرد — به جانب آشیانه راز کرد'},
+  {p:'عطار', t:'هر که را دردی نبود بی‌درد بود — هر که را عشقی نبود افسرد بود'},
+  {p:'باباطاهر', t:'دل ای دل چون به دستت اختیاره — چرا دور از نگارت بی‌قراره'},
+  {p:'باباطاهر', t:'ز دست دیده و دل هر دو فریاد — که هر چه دیده بیند دل کند یاد'},
+  {p:'ناصرخسرو', t:'کار جهان‌بین چو نگویم که چیست — راه یقین جز به عمل چیست چیست'},
+  {p:'رودکی', t:'بوی جوی مولیان آید همی — یاد یار مهربان آید همی'},
+  {p:'رودکی', t:'هر که ناموخت از گذشت روزگار — هیچ ناموزد ز هیچ آموزگار'},
+  {p:'جامی', t:'ای دل عشق او گزیده‌ای دل — بر آتش هجر او تپیده‌ای دل'},
+  {p:'انوری', t:'گر بر دل ریش من گذر خواهی کرد — بر خاک قدم به احتیاط باید کرد'},
+  {p:'خاقانی', t:'مرغ باغ ملکوتم نیم از عالم خاک — چند روزی قفسی ساخته‌اند از بدنم'},
+  {p:'حافظ', t:'ز گریه مردم چشمم نشسته در خون دل — تو گویی لعل بدخشان بکارید اندر آن'},
+  {p:'حافظ', t:'به می سجاده رنگین کن گرت پیر مغان گوید — که سالک بی‌خبر نبود ز راه و رسم منزل‌ها'},
+  {p:'حافظ', t:'روی بنما و وجود خودم از یاد ببر — خرمن سوختگان را همه گو باد ببر'},
+  {p:'حافظ', t:'زلف آشفته و خوی‌کرده و خندان‌لب و مست — پیرهن چاک و غزل‌خوان و صراحی در دست'},
+  {p:'حافظ', t:'بلبلی برگ گلی خوش‌رنگ در منقار داشت — واندر آن برگ و نوا خوش ناله‌های زار داشت'},
+  {p:'حافظ', t:'ای پادشه خوبان داد از غم تنهایی — دل بی تو به جان آمد وقت است که بازآیی'},
+  {p:'حافظ', t:'گفتم غم تو دارم گفتا غمت سرآید — گفتم که ماه من شو گفتا اگر برآید'},
+  {p:'حافظ', t:'دانی که چنگ و عود چه تقریر می‌کنند — پنهان خورید باده که تعزیر می‌کنند'},
+  {p:'حافظ', t:'خیز تا از در میخانه گذر بکنیم — به تماشای رخ باده‌فروش این ره کنیم'},
+  {p:'حافظ', t:'اگر رفیق شفیقی درست‌پیمان باش — حریف خانه و گرمابه و گلستان باش'},
+  {p:'حافظ', t:'دیدی که یار جز سر جور و ستم نداشت — بشکست عهد و از غم ما هیچ غم نداشت'},
+  {p:'سعدی', t:'یاری اندر کس نمی‌بینم یاران را چه شد — دوستی کی آخر آمد دوستداران را چه شد'},
+  {p:'سعدی', t:'من از آن روز که در بند توام آزادم — پادشاهم که به دست تو اسیر افتادم'},
+  {p:'سعدی', t:'وقت است که بردارم از این ورطه سر خویش — تا باز نپرسند نشان از پدر خویش'},
+  {p:'سعدی', t:'همه کس طالب یار است چه هوشیار و چه مست — همه جا خانه عشق است چه مسجد چه کنشت'},
+  {p:'سعدی', t:'هزار نکته باریک‌تر ز مو این‌جاست — نه هر که سر بتراشد قلندری داند'},
+  {p:'مولوی', t:'ای که در جانم رخنه کرده‌ای — چون دلم را دام دام کرده‌ای'},
+  {p:'مولوی', t:'بشنو این نی چون شکایت می‌کند — وز جدایی‌ها حکایت می‌کند'},
+  {p:'مولوی', t:'خمش کن تا خدایت هم‌زبان شود — خمش کن تا دلت آرامجان شود'},
+  {p:'مولوی', t:'ما زآب کاهگل صافی شده‌ایم — از قید هوا و شهوت آزاد شده‌ایم'},
+  {p:'خیام', t:'یاران موافق همه از دست شدند — در پای اجل یکان یکان پست شدند'},
+  {p:'خیام', t:'گویند بهشت و حور عین خواهد بود — آنجا می ناب و انگبین خواهد بود'},
+  {p:'خیام', t:'می نوش که عمر جاودانی این است — خود حاصلت از دور جوانی این است'},
+  {p:'فردوسی', t:'زبان آوری چون منش خواستار — همی بگذرد سالیان روزگار'},
+  {p:'فردوسی', t:'کسی کو خرد را ندارد ز پیش — دلش گردد از کرده خویش ریش'},
+  {p:'صائب تبریزی', t:'ز بس که کوه غمت بر دلم گران افتاد — چو سایه از پی هر آفتاب می‌گردم'},
+  {p:'صائب تبریزی', t:'دلی که عاشق دیدار دلبری باشد — چه غم ز طعنه هر بی‌خبر که می‌آید'},
+  {p:'بیدل دهلوی', t:'به رنگ لاله در این باغ داغ‌دار بس است — هر آن که شعله فروزد به یک شرار بس است'},
+  {p:'وحشی بافقی', t:'کاش بودی حال هجران را زبانی تا بگفت — درد دل با یار می‌گفتم که شرحش برنگفت'},
+  {p:'فروغی بسطامی', t:'نه من ز بی‌عملی در جهان ملولم و بس — ملالت علما هم ز علم بی‌عمل است'},
+  {p:'عبید زاکانی', t:'گر شب هجران گذشت و روز وصلت روی داد — یاد آور از شب‌های هجران در شب‌های وصال'},
+  {p:'حافظ', t:'ما در پیاله عکس رخ یار دیده‌ایم — ای بی‌خبر ز لذت شرب مدام ما'},
+  {p:'حافظ', t:'مرا به کار جهان هرگز التفات نبود — رخ تو در نظر من چنین خوشش آراست'},
+  {p:'سعدی', t:'دیر آمدی ای نگار سرمست — زودست هنوز جای در بست'},
+  {p:'مولوی', t:'شاد باش ای عشق خوش‌سودای ما — ای طبیب جمله علت‌های ما'},
+  {p:'خیام', t:'افسوس که سرمایه ز کف بیرون شد — وز دست اجل بسی جگرها خون شد'},
+  {p:'رهی معیری', t:'دلم گرفته ز غم های بی‌شمار، رها کن — بیا و بار غمم را ز دوش من بردار'},
+  {p:'عارف قزوینی', t:'گر مرغ من از قفس بپرد چه عجب — بس مرغ که در قفس فسرد چه عجب'}
+];
+function renderPoems(query){
+  const wrap = document.getElementById('poemsList');
+  if(!wrap) return;
+  query = (query||'').trim();
+  const list = !query ? POEMS : POEMS.filter(p => p.p.includes(query));
+  wrap.innerHTML = `<div style="font-size:11px; color:var(--text-sub); margin-bottom:14px; line-height:1.9;">گزیده‌ای از ابیات و اشعار ماندگار شاعران بزرگ پارسی‌گو.</div>` +
+    (list.map(p=>`<div class="saying-card"><p style="white-space:pre-line;">${p.t}</p><span>${p.p}</span></div>`).join('') ||
+     '<p style="font-size:11px; color:var(--text-sub); text-align:center; padding:20px;">شاعری با این نام پیدا نشد</p>');
+}
+
 function renderSayings(cat){
   cat = cat || 'all';
   const wrap = document.getElementById('sayingsList');
@@ -3232,6 +3437,174 @@ function expandNavasan(){
   loadNavasanWidget(NAVASAN_FULL_URL);
 }
 loadNavasanWidget(NAVASAN_PRIORITY_URL);
+
+/* ============ PRAYER TIMES (اوقات شرعی) — theshia.org API ============ */
+const PT_CITIES = [
+  {group:'شهرهای مذهبی', name:'قم', lat:34.64, lng:50.88, tz:'Asia/Tehran'},
+  {group:'شهرهای مذهبی', name:'مشهد', lat:36.30, lng:59.61, tz:'Asia/Tehran'},
+  {group:'شهرهای مذهبی', name:'کربلا', lat:32.62, lng:44.02, tz:'Asia/Baghdad'},
+  {group:'شهرهای مذهبی', name:'نجف', lat:32.03, lng:44.34, tz:'Asia/Baghdad'},
+  {group:'شهرهای مذهبی', name:'کاظمین (بغداد)', lat:33.38, lng:44.34, tz:'Asia/Baghdad'},
+  {group:'شهرهای مذهبی', name:'سامرا', lat:34.20, lng:43.87, tz:'Asia/Baghdad'},
+  {group:'کلان‌شهرهای ایران', name:'تهران', lat:35.70, lng:51.42, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'اصفهان', lat:32.65, lng:51.67, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'شیراز', lat:29.61, lng:52.53, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'اهواز', lat:31.32, lng:48.67, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'کرج', lat:35.83, lng:50.99, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'یزد', lat:31.90, lng:54.37, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'کرمان', lat:30.28, lng:57.08, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'قزوین', lat:36.28, lng:50.00, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'کرمانشاه', lat:34.31, lng:47.07, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'زاهدان', lat:29.50, lng:60.86, tz:'Asia/Tehran'},
+  {group:'کلان‌شهرهای ایران', name:'ساری', lat:36.56, lng:53.06, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'رشت', lat:37.28, lng:49.58, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'آستارا', lat:38.42, lng:48.87, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'بندر انزلی', lat:37.47, lng:49.46, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'لاهیجان', lat:37.20, lng:50.00, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'لنگرود', lat:37.20, lng:50.15, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'تالش', lat:37.78, lng:48.93, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'فومن', lat:37.22, lng:49.32, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'رودسر', lat:37.13, lng:50.28, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'صومعه‌سرا', lat:37.29, lng:49.32, tz:'Asia/Tehran'},
+  {group:'استان گیلان', name:'آستانه اشرفیه', lat:37.26, lng:49.94, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'تبریز', lat:38.08, lng:46.29, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'مراغه', lat:37.39, lng:46.24, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'مرند', lat:38.43, lng:45.77, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'اهر', lat:38.48, lng:47.07, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'میانه', lat:37.43, lng:47.72, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'بناب', lat:37.33, lng:46.05, tz:'Asia/Tehran'},
+  {group:'آذربایجان شرقی', name:'سراب', lat:37.94, lng:47.53, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'ارومیه', lat:37.55, lng:45.08, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'خوی', lat:38.55, lng:44.95, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'مهاباد', lat:36.76, lng:45.72, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'سلماس', lat:38.20, lng:44.77, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'میاندوآب', lat:36.97, lng:46.10, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'بوکان', lat:36.52, lng:46.21, tz:'Asia/Tehran'},
+  {group:'آذربایجان غربی', name:'پیرانشهر', lat:36.70, lng:45.14, tz:'Asia/Tehran'},
+  {group:'بین‌المللی', name:'لندن', lat:51.51, lng:-0.13, tz:'Europe/London'},
+  {group:'بین‌المللی', name:'استانبول', lat:41.01, lng:28.98, tz:'Europe/Istanbul'},
+  {group:'بین‌المللی', name:'دمشق', lat:33.51, lng:36.29, tz:'Asia/Damascus'},
+];
+let ptSelectedCity = null;
+try{ const saved = localStorage.getItem('hy_pt_city'); if(saved) ptSelectedCity = JSON.parse(saved); }catch(e){}
+function renderPtCityList(query){
+  const listEl = document.getElementById('ptCityList');
+  const resultEl = document.getElementById('ptResult');
+  if(!listEl) return;
+  query = (query||'').trim();
+  if(!query && ptSelectedCity){
+    listEl.style.display = 'none';
+    resultEl.style.display = 'block';
+    loadPrayerTimesFor(ptSelectedCity);
+    return;
+  }
+  listEl.style.display = 'flex';
+  resultEl.style.display = 'none';
+  const filtered = PT_CITIES.filter(c => !query || c.name.includes(query));
+  const groups = {};
+  filtered.forEach(c => { (groups[c.group] = groups[c.group] || []).push(c); });
+  let html = '';
+  Object.keys(groups).forEach(g => {
+    html += `<div class="pt-group-label">${g}</div>`;
+    groups[g].forEach(c => {
+      html += `<div class="pt-city-item" onclick='selectPtCity(${JSON.stringify(c)})'><b>${c.name}</b><span>مشاهده اوقات ←</span></div>`;
+    });
+  });
+  listEl.innerHTML = html || '<p style="font-size:11px; color:var(--text-sub); text-align:center; padding:20px;">شهری با این نام پیدا نشد</p>';
+}
+function selectPtCity(city){
+  ptSelectedCity = city;
+  localStorage.setItem('hy_pt_city', JSON.stringify(city));
+  document.getElementById('ptCitySearch').value = '';
+  document.getElementById('ptCityList').style.display = 'none';
+  document.getElementById('ptResult').style.display = 'block';
+  loadPrayerTimesFor(city);
+}
+function changePtCity(){
+  ptSelectedCity = null;
+  document.getElementById('ptResult').style.display = 'none';
+  renderPtCityList('');
+}
+const PT_LABELS = [
+  ['fajr','اذان صبح'], ['sunrise','طلوع آفتاب'], ['dhuhr','اذان ظهر'], ['asr','اذان عصر'],
+  ['maghrib','اذان مغرب'], ['isha','اذان عشا'], ['midnight','نیمه‌شب شرعی'], ['sunset','غروب آفتاب']
+];
+async function loadPrayerTimesFor(city){
+  const header = document.getElementById('ptCityHeader');
+  const grid = document.getElementById('ptTimesGrid');
+  const todayStr = new Date().toISOString().slice(0,10);
+  header.innerHTML = `<span class="pt-back-btn" onclick="changePtCity()">← تغییر شهر</span><div class="pt-city-name">${city.name}</div><div class="pt-date">در حال دریافت اوقات شرعی...</div>`;
+  grid.innerHTML = '';
+  try{
+    const url = `https://theshia.org/api/v1/prayer-times?lat=${city.lat}&lng=${city.lng}&method=Tehran&date=${todayStr}&tz=${encodeURIComponent(city.tz)}`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    const day = (data.days && data.days[0]) || data;
+    const local = day.local || day;
+    header.innerHTML = `<span class="pt-back-btn" onclick="changePtCity()">← تغییر شهر</span><div class="pt-city-name">${city.name}</div><div class="pt-date">${new Date().toLocaleDateString('fa-IR', {weekday:'long', day:'numeric', month:'long'})}</div>`;
+    grid.innerHTML = PT_LABELS.map(([key,label]) => {
+      const raw = local[key] || day[key] || '--:--';
+      const time = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : raw;
+      const hl = (key==='fajr' || key==='maghrib') ? 'highlight' : '';
+      return `<div class="pt-time-card ${hl}"><span>${label}</span><b>${time}</b></div>`;
+    }).join('');
+  }catch(err){
+    console.error('prayer times fetch failed:', err);
+    header.innerHTML = `<span class="pt-back-btn" onclick="changePtCity()">← تغییر شهر</span><div class="pt-city-name">${city.name}</div><div class="pt-date">دریافت اوقات شرعی ممکن نشد — اتصال اینترنت را بررسی کنید</div>`;
+  }
+}
+
+/* ============ HOME PANEL: city prompt + next-azan chip ============ */
+function selectPtCitySilent(city){
+  ptSelectedCity = city;
+  localStorage.setItem('hy_pt_city', JSON.stringify(city));
+  loadHomePrayerPanel(city);
+}
+function initHomeCityPrompt(){
+  if(ptSelectedCity){
+    loadHomePrayerPanel(ptSelectedCity);
+    return;
+  }
+  setTimeout(()=>{
+    const val = (window.prompt('برای نمایش اوقات شرعی، نام شهر خود را وارد کنید (مثلاً تهران، قم، مشهد):','تهران')||'').trim();
+    if(!val) return;
+    const match = PT_CITIES.find(c => c.name.includes(val) || val.includes(c.name));
+    const city = match || {group:'شهر شما', name:val, lat:35.70, lng:51.42, tz:'Asia/Tehran'};
+    selectPtCitySilent(city);
+  }, 900);
+}
+async function loadHomePrayerPanel(city){
+  const azanEl = document.getElementById('statNextAzan');
+  const cityEl = document.getElementById('statAzanCity');
+  if(!azanEl || !cityEl) return;
+  cityEl.textContent = city.name;
+  try{
+    const todayStr = new Date().toISOString().slice(0,10);
+    const url = `https://theshia.org/api/v1/prayer-times?lat=${city.lat}&lng=${city.lng}&method=Tehran&date=${todayStr}&tz=${encodeURIComponent(city.tz)}`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    const day = (data.days && data.days[0]) || data;
+    const local = day.local || day;
+    const order = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
+    const now = new Date();
+    let next = null;
+    for(const key of order){
+      const raw = local[key] || day[key];
+      if(!raw) continue;
+      const timeStr = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : raw;
+      const [hh,mm] = timeStr.split(':').map(Number);
+      const t = new Date(now); t.setHours(hh, mm, 0, 0);
+      if(t > now){ next = timeStr; break; }
+    }
+    azanEl.textContent = next || '--:--';
+  }catch(err){
+    console.error('home prayer panel fetch failed:', err);
+    azanEl.textContent = '--:--';
+  }
+}
+initHomeCityPrompt();
 
 async function loadEconomyPrices(manual){
   const btn = document.getElementById('econRefreshBtn');
@@ -4127,24 +4500,29 @@ function runGoogleSearch(){
 }
 
 /* ============ WHAT'S NEW panel — shown on every visit (Play Store style) ============ */
-const APP_VERSION = '1.1.0';
+const APP_VERSION = '1.1.5';
 const WHATS_NEW = [
-  {icon:'<path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12L3 7l9-5 9 5-9 5z"/>', text:'بخش «امکانات» تازه: قرآن، سخن زیبا، چهارده معصوم، کتابخانه، اخبار، اقتصاد و موسیقی همه یک‌جا.'},
-  {icon:'<circle cx="12" cy="12" r="7"/><path d="M21 21l-4.3-4.3"/>', text:'دستیار قدیمی حذف شد و به‌جایش دکمه جست‌وجوی سریع سؤالات در گوگل اضافه شد.'},
-  {icon:'<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>', text:'بخش اقتصاد ساده‌تر شد: فقط قیمت لحظه‌ای دلار، بزرگ‌تر و خواناتر.'},
-  {icon:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>', text:'پخش‌کننده موسیقی بزرگ‌تر شد و قابلیت بزرگ‌نمایی و مخفی‌کردن گرفت.'},
-  {icon:'<circle cx="12" cy="12" r="3"/>', text:'امکان تغییر زبان (فارسی، عربی، انگلیسی) و رنگ‌بندی متنوع‌تر در تنظیمات.'},
-  {icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>', text:'شخصی‌سازی پروفایل با بیوگرافی و رنگ کاور دلخواه.'}
+  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'بخش تازه «اوقات شرعی»: اذان و نیمه‌شب شرعی برای هر شهر، با جست‌وجوی سریع و دسته‌بندی مرتب شهرها.'},
+  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'بخش‌های پرکاربرد (نماز، قرآن، موسیقی) بالاتر و در دسترس‌تر شدند؛ چیدمان صفحه اصلی منطقی‌تر شد.'},
+  {icon:'<path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/>', text:'لوگوی برنامه به‌روزرسانی شد؛ فونت عنوان‌ها یکدست‌تر و خواناتر شد.'},
+  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'بهینه‌سازی سرعت: کاهش افکت‌های سنگین بصری برای اجرای نرم‌تر روی گوشی‌های ضعیف‌تر.'},
+  {icon:'<circle cx="12" cy="12" r="3"/>', text:'ظاهر تم روشن و تیره کمی تازه‌تر و متعادل‌تر شد.'},
+  {icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>', text:'۱۰ آواتار آماده‌ی طلبگی و امکان انتخاب سریع پروفایل.'}
 ];
 function renderWhatsNew(){
   const list = document.getElementById('wnList');
   if(!list) return;
   list.innerHTML = WHATS_NEW.map(item => `<li><span class="wn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg></span><span>${item.text}</span></li>`).join('');
+  const badge = document.querySelector('.wn-badge');
+  if(badge) badge.textContent = 'نسخه جدید ' + APP_VERSION.replace(/[0-9.]/g, d => '۰۱۲۳۴۵۶۷۸۹.'[('0123456789.').indexOf(d)]);
 }
-function openWhatsNew(){
+function openWhatsNew(force){
+  const seen = localStorage.getItem('hy_seen_version');
+  if(!force && seen === APP_VERSION) return;
   renderWhatsNew();
   document.getElementById('wnOverlay').classList.add('show');
   document.getElementById('wnPanel').classList.add('show');
+  localStorage.setItem('hy_seen_version', APP_VERSION);
 }
 function closeWhatsNew(){
   document.getElementById('wnOverlay').classList.remove('show');
