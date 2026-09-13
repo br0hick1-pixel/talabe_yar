@@ -318,6 +318,11 @@ body{
 .btn-primary:active::after{ background-position:-20% 0; }
 [data-theme="dark"] .btn-primary{color:#0F1A15;}
 .btn-primary:active{transform:scale(0.97);}
+.btn-secondary{
+  background:rgba(212,175,90,0.14); color:var(--text-main); border:1.5px dashed var(--gold);
+  padding:11px 22px; border-radius:14px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;
+}
+.btn-secondary:active{ transform:scale(0.97); background:rgba(212,175,90,0.22); }
 .btn-ghost{
   background:var(--card); color:var(--green); border:1px solid var(--gold-soft);
   padding:10px 20px; border-radius:14px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer;
@@ -713,17 +718,18 @@ h1,h2,h3,h4,p{font-family:inherit;}
 }
 .drawer-overlay.show{opacity:1; pointer-events:auto;}
 .side-drawer{
-  position:fixed; top:10px; bottom:10px; right:-84%; width:76%; max-width:290px; z-index:199;
-  background:rgba(253,251,245,0.72); backdrop-filter:blur(18px) saturate(180%); -webkit-backdrop-filter:blur(18px) saturate(180%);
+  position:fixed; top:10px; bottom:10px; right:10px; width:76%; max-width:290px; z-index:199;
+  background:rgba(253,251,245,0.55); backdrop-filter:blur(26px) saturate(200%); -webkit-backdrop-filter:blur(26px) saturate(200%);
   box-shadow:0 30px 80px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.15), inset 0 0 0 1.5px rgba(212,175,90,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
   border-radius:28px;
-  transition:right .38s cubic-bezier(.16,.9,.2,1), left .38s cubic-bezier(.16,.9,.2,1); overflow-y:auto;
+  transform:translateX(110%); opacity:0;
+  transition:transform .42s cubic-bezier(.22,1,.36,1), opacity .32s ease; overflow-y:auto; will-change:transform;
   padding:20px 14px 24px 14px;
 }
-[data-theme="dark"] .side-drawer{ background:rgba(15,28,22,0.78); box-shadow:0 30px 80px rgba(0,0,0,0.65), inset 0 0 0 1.5px rgba(212,175,90,0.22), inset 0 1px 0 rgba(255,255,255,0.06); }
-[dir="rtl"] .side-drawer{right:auto; left:-84%;}
-.side-drawer.show{right:10px;}
-[dir="rtl"] .side-drawer.show{left:10px; right:auto;}
+[data-theme="dark"] .side-drawer{ background:rgba(15,28,22,0.6); box-shadow:0 30px 80px rgba(0,0,0,0.65), inset 0 0 0 1.5px rgba(212,175,90,0.22), inset 0 1px 0 rgba(255,255,255,0.06); }
+[dir="rtl"] .side-drawer{ transform:translateX(-110%); }
+.side-drawer.show{ transform:translateX(0); opacity:1; }
+[dir="rtl"] .side-drawer.show{ transform:translateX(0); opacity:1; }
 .sd-profile{display:flex; align-items:center; gap:11px; padding:5px 5px 15px 5px; border-bottom:1px solid rgba(201,151,58,0.2); margin-bottom:12px;}
 .sd-profile .av-mini{width:44px;height:44px;border-radius:50%; overflow:hidden; background:linear-gradient(160deg,var(--sage),var(--green-soft)); flex-shrink:0; box-shadow:0 4px 12px rgba(0,0,0,0.18), 0 0 0 2px rgba(212,175,90,0.4);}
 .sd-profile .av-mini svg{width:100%;height:100%;}
@@ -936,20 +942,23 @@ h1,h2,h3,h4,p{font-family:inherit;}
 /* ============ GLASS MODAL (reusable fancy panel) ============ */
 .glass-modal-overlay{
   position:fixed; inset:0; z-index:220; display:flex; align-items:flex-end; justify-content:center;
-  background:rgba(10,20,15,0.45); opacity:0; pointer-events:none; transition:opacity .3s ease;
+  background:rgba(10,20,15,0.4); opacity:0; pointer-events:none; transition:opacity .35s ease; backdrop-filter:blur(2px);
 }
 .glass-modal-overlay.show{ opacity:1; pointer-events:auto; }
 .glass-modal-panel{
   width:100%; max-width:460px; margin-bottom:0; padding:22px 20px calc(env(safe-area-inset-bottom) + 22px) 20px;
   border-radius:26px 26px 0 0; position:relative;
-  background:rgba(253,251,245,0.68); backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%);
+  background:rgba(253,251,245,0.55); backdrop-filter:blur(24px) saturate(190%); -webkit-backdrop-filter:blur(24px) saturate(190%);
   border-top:1px solid rgba(255,255,255,0.5); box-shadow:0 -10px 40px rgba(0,0,0,0.25);
-  transform:translateY(30px); transition:transform .35s cubic-bezier(.2,.85,.25,1);
+  transform:translateY(46px) scale(.98); opacity:0; transition:transform .4s cubic-bezier(.22,1,.36,1), opacity .3s ease;
 }
-.glass-modal-overlay.show .glass-modal-panel{ transform:translateY(0); }
-[data-theme="dark"] .glass-modal-panel{ background:rgba(18,32,26,0.68); border-top:1px solid rgba(255,255,255,0.1); }
+.glass-modal-overlay.show .glass-modal-panel{ transform:translateY(0) scale(1); opacity:1; }
+[data-theme="dark"] .glass-modal-panel{ background:rgba(18,32,26,0.55); border-top:1px solid rgba(255,255,255,0.1); }
 .gm-close{ position:absolute; top:14px; left:16px; background:rgba(127,127,127,0.15); border:none; border-radius:10px; width:32px;height:32px; color:var(--text-main); cursor:pointer; display:flex; align-items:center; justify-content:center; }
 .gm-title{ margin:0 0 14px 0; font-size:15px; font-weight:700; text-align:center; }
+.about-block{ margin-bottom:12px; }
+.about-block-title{ font-size:11px; font-weight:800; color:var(--gold); margin-bottom:4px; }
+.about-block p{ margin:0; font-size:12.5px; line-height:1.9; color:var(--text-main); }
 .avatar-preset-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; max-height:56vh; overflow-y:auto; padding-bottom:4px; }
 .avatar-preset-item{ display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; padding:6px 2px; border-radius:14px; transition:background .15s ease; }
 .avatar-preset-item:active{ background:rgba(127,127,127,0.15); }
@@ -1052,14 +1061,26 @@ h1,h2,h3,h4,p{font-family:inherit;}
 .ai-fab{ background:linear-gradient(155deg,var(--gold),var(--green-deep)); }
 .ai-panel{ max-height:78vh; overflow-y:auto; }
 .ai-marja-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px; }
-.ai-marja-btn{ padding:12px 8px; border-radius:14px; border:1px solid var(--sage); background:var(--card); color:var(--text-main); font-family:inherit; font-size:12px; font-weight:600; cursor:pointer; }
-.ai-marja-btn:active{ background:var(--sage); }
+.ai-marja-btn{ padding:12px 8px; border-radius:14px; border:1px solid var(--sage); background:var(--card); color:var(--text-main); font-family:inherit; font-size:12px; font-weight:600; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.ai-marja-btn:active{ background:var(--sage); transform:scale(0.96); }
+.ai-header-badge{ width:34px; height:34px; border-radius:11px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,var(--gold),var(--green-deep)); box-shadow:0 4px 14px rgba(201,151,58,0.35); color:#F7EFE3; }
+.ai-header-badge svg{ width:18px; height:18px; }
 .ai-marja-tag{ display:inline-block; font-size:10.5px; font-weight:700; color:var(--green); background:rgba(34,147,106,0.12); padding:5px 10px; border-radius:10px; margin-bottom:10px; }
-.ai-chat-log{ max-height:36vh; overflow-y:auto; display:flex; flex-direction:column; gap:8px; margin-bottom:10px; padding-left:2px; }
-.ai-msg{ max-width:85%; padding:10px 13px; border-radius:14px; font-size:12.5px; line-height:1.8; }
-.ai-msg.user{ align-self:flex-end; background:linear-gradient(135deg,var(--green),var(--green-deep)); color:#F7F3E9; border-bottom-left-radius:4px; }
-.ai-msg.bot{ align-self:flex-start; background:var(--card); box-shadow:var(--shadow); border-bottom-right-radius:4px; }
-.ai-msg.bot.loading{ opacity:.7; }
+.ai-chat-log{ max-height:36vh; overflow-y:auto; display:flex; flex-direction:column; gap:14px; margin-bottom:10px; padding-left:2px; }
+.ai-msg-row{ display:flex; align-items:flex-end; gap:8px; }
+.ai-msg-row.user{ flex-direction:row-reverse; }
+.ai-avatar{ width:26px; height:26px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,var(--gold),var(--green-deep)); box-shadow:0 3px 10px rgba(0,0,0,0.22); }
+.ai-avatar svg{ width:14px; height:14px; color:#F7EFE3; }
+.ai-msg{ max-width:78%; padding:11px 14px; border-radius:18px; font-size:12.5px; line-height:1.85; position:relative; }
+.ai-msg.user{ background:linear-gradient(135deg,var(--green),var(--green-deep)); color:#F7F3E9; border-bottom-left-radius:5px; box-shadow:0 4px 14px rgba(15,61,46,0.25); }
+.ai-msg.bot{ background:var(--card); box-shadow:0 3px 12px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(212,175,90,0.12); border-bottom-right-radius:5px; }
+[data-theme="dark"] .ai-msg.bot{ box-shadow:0 3px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(212,175,90,0.1); }
+.ai-msg.bot.loading{ opacity:.85; }
+.ai-typing{ display:inline-flex; gap:4px; align-items:center; padding:2px 0; }
+.ai-typing span{ width:6px; height:6px; border-radius:50%; background:var(--gold); opacity:.6; animation:aiTypingBounce 1.2s ease-in-out infinite; }
+.ai-typing span:nth-child(2){ animation-delay:.15s; }
+.ai-typing span:nth-child(3){ animation-delay:.3s; }
+@keyframes aiTypingBounce{ 0%,60%,100%{ transform:translateY(0); opacity:.5; } 30%{ transform:translateY(-4px); opacity:1; } }
 .ai-change-marja{ color:var(--green); font-weight:700; cursor:pointer; }
 [data-theme="dark"] .search-go{color:#0F1A15;}
 .search-go svg{width:19px;height:19px;}
@@ -1071,9 +1092,33 @@ h1,h2,h3,h4,p{font-family:inherit;}
 #screen-assistant .ai-page-chat{ display:flex; flex-direction:column; flex:1; min-height:0; }
 .ai-chat-log-page{ flex:1; max-height:none; min-height:50vh; }
 .ai-input-row{ position:sticky; bottom:calc(70px + env(safe-area-inset-bottom)); background:var(--cream); padding-top:6px; }
+/* دکمه شناور دستیار هوشمند، داخل خودِ صفحه دستیار دیده نشود */
+body:has(#screen-assistant.active) #searchFab{ display:none; }
+
+/* ---------- Weather Screen ---------- */
+.wx-hero{ text-align:center; padding:20px 10px 8px; }
+.wx-hero-icon{ font-size:56px; line-height:1; }
+.wx-temp{ font-size:44px; font-weight:800; color:var(--text-main); margin-top:4px; }
+.wx-label{ font-size:13px; color:var(--text-sub); margin-top:4px; }
+.wx-minmax{ font-size:11px; color:var(--text-sub); opacity:.8; margin-top:6px; }
+.wx-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:18px 0; }
+.wx-card{ background:var(--card-bg,#fff); border:1px solid var(--cream-deep); border-radius:16px; padding:14px 8px; text-align:center; }
+[data-theme="dark"] .wx-card{ background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.08); }
+.wx-card-ic{ color:var(--green); margin-bottom:6px; display:flex; justify-content:center; }
+.wx-card-ic svg{ width:22px; height:22px; }
+.wx-card-val{ font-size:15px; font-weight:700; color:var(--text-main); }
+.wx-card-lbl{ font-size:10px; color:var(--text-sub); margin-top:2px; }
 /* هنگام باز بودن صفحه دستیار، انیمیشن‌های پس‌زمینه متوقف می‌شوند تا اسکرول و تایپ روان‌تر بماند */
 body:has(#screen-assistant.active) .arch-bg .orb,
 body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
+
+/* ---------- کاهش جلوه‌های ظاهری (طبق تنظیمات کاربر) ---------- */
+body.reduced-effects .arch-bg .orb,
+body.reduced-effects .arch-bg .ray,
+body.reduced-effects .search-fab,
+body.reduced-effects .dome3d,
+body.reduced-effects .tap-ripple{ animation:none !important; }
+body.reduced-effects *{ transition-duration:.05s !important; }
 /* =========================================================
    NEW: "What's New" release panel (Google-Play style, dismissible)
 ========================================================= */
@@ -1138,8 +1183,9 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
   width:38px; height:38px; border-radius:50%; overflow:hidden; border:1.5px solid var(--sage);
   background:linear-gradient(160deg,var(--sage),var(--green-soft)); box-shadow:var(--shadow);
   display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; margin-left:8px;
+  padding:0; line-height:0; -webkit-mask-image:radial-gradient(circle,#fff 100%,#fff 100%);
 }
-.home-avatar-btn img{ width:100%; height:100%; object-fit:cover; }
+.home-avatar-btn img{ display:block; width:100%; height:100%; object-fit:cover; border-radius:50%; }
 .home-avatar-btn svg{ width:19px; height:19px; color:#fff; }
 
 /* Avatar picker in profile customization */
@@ -1706,7 +1752,7 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
     <div id="ptResult" style="display:none;">
       <div class="pt-city-header" id="ptCityHeader"></div>
       <div class="pt-times-grid" id="ptTimesGrid"></div>
-      <div class="econ-note" style="margin-top:10px;">محاسبات بر اساس روش جعفری (شیعی) از سرویس عمومی <a href="https://theshia.org" target="_blank" style="color:var(--green); font-weight:700;">theshia.org</a> دریافت می‌شود.</div>
+      <div class="econ-note" style="margin-top:10px;">محاسبات بر اساس روش جعفری (شیعی) از سرویس عمومی <a href="https://aladhan.com" target="_blank" style="color:var(--green); font-weight:700;">Aladhan.com</a> دریافت می‌شود.</div>
     </div>
   </section>
 
@@ -1802,6 +1848,11 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
         <label>تصویر پروفایل آماده</label>
         <div class="avatar-picker" id="avatarPicker"></div>
       </div>
+      <div class="pc-field">
+        <label>یا آپلود از گالری</label>
+        <button class="btn-secondary" style="width:100%;" onclick="document.getElementById('avatarUploadInput').click()">انتخاب تصویر از گالری</button>
+        <input type="file" id="avatarUploadInput" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+      </div>
       <button class="btn-primary" style="width:100%; margin-top:6px;" onclick="saveProfileCustomization()">ذخیره شخصی‌سازی</button>
     </div>
 
@@ -1834,7 +1885,7 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
       </div>
       <div class="row" onclick="showAbout()">
         <div class="row-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
-        <div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۳.۰</div></div>
+        <div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۳.۵</div></div>
         <div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div>
       </div>
     </div>
@@ -1900,8 +1951,20 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
     </div>
 
     <div class="settings-group">
+      <div class="sg-title">ظاهر و یادآوری</div>
+      <div class="setting-row">
+        <div class="sr-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>یادآوری روایات</div>
+        <div class="switch on" id="sw-hadith" onclick="toggleSwitch(this,'hadith_reminder')"><div class="knob"></div></div>
+      </div>
+      <div class="setting-row">
+        <div class="sr-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>جلوه‌های ظاهری و انیمیشن</div>
+        <div class="switch on" id="sw-effects" onclick="toggleSwitch(this,'visual_effects')"><div class="knob"></div></div>
+      </div>
+    </div>
+
+    <div class="settings-group">
       <div class="sg-title">درباره برنامه</div>
-      <div class="row" onclick="showAbout()"><div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۳.۰</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
+      <div class="row" onclick="showAbout()"><div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۳.۵</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
       <div class="row" onclick="shareApp()" style="border-top:1px solid var(--cream-deep);"><div class="row-info"><div class="r1">اشتراک‌گذاری برنامه</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
       <div class="row" onclick="reportProblem()" style="border-top:1px solid var(--cream-deep);"><div class="row-info"><div class="r1">گزارش مشکل</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
     </div>
@@ -1911,7 +1974,10 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
   <section class="screen" id="screen-assistant">
     <div class="topbar">
       <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">دستیار هوشمند شرعی</div><div class="t2" id="aiHeadSub">راهنمای شما در پرسش‌های دینی و طلبگی</div></div>
+      <div class="brand-text" style="text-align:center; display:flex; align-items:center; gap:9px; justify-content:center;">
+        <div class="ai-header-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/></svg></div>
+        <div><div class="t1" style="font-size:16px;">دستیار هوشمند شرعی</div><div class="t2" id="aiHeadSub">راهنمای شما در پرسش‌های دینی و طلبگی</div></div>
+      </div>
       <div style="width:40px;"></div>
     </div>
 
@@ -1929,19 +1995,51 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
       <div class="ai-marja-tag" id="aiMarjaTag"></div>
       <div class="ai-chat-log ai-chat-log-page" id="aiChatLog"></div>
       <div class="search-row ai-input-row">
-        <input type="text" id="searchInput" placeholder="سؤال خود را بنویسید..." onkeydown="if(event.key==='Enter') sendAiMessage()">
         <button class="search-go" onclick="sendAiMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <input type="text" id="searchInput" placeholder="سؤال خود را بنویسید..." onkeydown="if(event.key==='Enter') sendAiMessage()">
       </div>
       <p class="search-hint">پاسخ‌های دستیار هوشمند جنبه‌ی راهنمایی اولیه دارد و جایگزین استفتاء مستقیم از دفتر مرجع نیست. <span class="ai-change-marja" onclick="resetAiMarja()">تغییر مرجع</span></p>
     </div>
   </section>
 
+  <!-- ===================== WEATHER (آب و هوا) ===================== -->
+  <section class="screen" id="screen-weather">
+    <div class="topbar">
+      <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">آب و هوا</div><div class="t2" id="wxCityLabel">در حال دریافت موقعیت...</div></div>
+      <button class="icon-btn" onclick="changeWeatherCity()" aria-label="تغییر شهر"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+    </div>
+
+    <div id="wxContent">
+      <div class="wx-hero">
+        <div class="wx-hero-icon" id="wxIcon">🌤️</div>
+        <div class="wx-temp" id="wxTemp">--°</div>
+        <div class="wx-label" id="wxLabel">در حال دریافت اطلاعات آب‌وهوا...</div>
+        <div class="wx-minmax" id="wxMinMax"></div>
+      </div>
+      <div class="wx-grid">
+        <div class="wx-card">
+          <div class="wx-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 4.6A2 2 0 1111 8H2m10.6 12.4A2 2 0 1014 17H2m15.6-8.4A2 2 0 1119 12H2"/></svg></div>
+          <div class="wx-card-val" id="wxWind">--</div>
+          <div class="wx-card-lbl">سرعت باد</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 7.5 7 12.5a7 7 0 01-14 0C5 9.5 12 2 12 2z"/></svg></div>
+          <div class="wx-card-val" id="wxHumidity">--</div>
+          <div class="wx-card-lbl">رطوبت</div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" transform="rotate(90 12 12)"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <div class="wx-card-val" id="wxFeels">--</div>
+          <div class="wx-card-lbl">احساس دما</div>
+        </div>
+      </div>
+      <p class="search-hint" style="text-align:center;">داده‌ها از سرویس آزاد Open-Meteo دریافت می‌شود و ممکن است با شرایط واقعی اندکی تفاوت داشته باشد.</p>
+    </div>
+  </section>
+
   <!-- ===================== BOTTOM NAV ===================== -->
   <nav class="bottom-nav">
-    <button class="nav-item" data-screen="profile" onclick="go('profile')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span>پروفایل</span>
-    </button>
     <button class="nav-item" data-screen="tools" onclick="go('tools')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
       <span>امکانات</span>
@@ -1950,9 +2048,9 @@ body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
       <span>خانه</span>
     </button>
-    <button class="nav-item" data-screen="music" onclick="go('music')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-      <span>موسیقی</span>
+    <button class="nav-item" data-screen="profile" onclick="go('profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>پروفایل</span>
     </button>
   </nav>
 
@@ -2381,6 +2479,7 @@ function go(name){
   if(name==='economy') loadEconomyPrices(false);
   if(name==='prayertimes') renderPtCityList('');
   if(name==='assistant') setTimeout(()=>document.getElementById('searchInput')?.focus(), 200);
+  if(name==='weather') loadWeatherScreen(wxSelectedCity || ptSelectedCity || {name:'تهران', lat:35.70, lng:51.42, tz:'Asia/Tehran'});
 }
 function openImam(id){
   renderImamDetail(id);
@@ -2842,6 +2941,7 @@ function toggleSwitch(el, key){
   localStorage.setItem('hy_'+key, JSON.stringify(on));
   if(key==='shuffle'){ isShuffle=on; document.getElementById('shuffleBtn').classList.toggle('active-toggle', on); }
   if(key==='repeat'){ isRepeat=on; document.getElementById('repeatBtn').classList.toggle('active-toggle', on); }
+  if(key==='visual_effects'){ document.body.classList.toggle('reduced-effects', !on); }
 }
 (function initSwitches(){
   document.getElementById('sw-shuffle').classList.toggle('on', isShuffle);
@@ -2850,6 +2950,11 @@ function toggleSwitch(el, key){
   document.getElementById('sw-autoplay').classList.toggle('on', autoplay);
   const notif = JSON.parse(localStorage.getItem('hy_notif') ?? 'true');
   document.getElementById('sw-notif').classList.toggle('on', notif);
+  const hadithOn = JSON.parse(localStorage.getItem('hy_hadith_reminder') ?? 'true');
+  document.getElementById('sw-hadith')?.classList.toggle('on', hadithOn);
+  const effectsOn = JSON.parse(localStorage.getItem('hy_visual_effects') ?? 'true');
+  document.getElementById('sw-effects')?.classList.toggle('on', effectsOn);
+  document.body.classList.toggle('reduced-effects', !effectsOn);
 })();
 
 /* ============ PROFILE ============ */
@@ -2982,7 +3087,27 @@ function reportProblem(){
   window.location.href = 'mailto:'+email+'?subject='+encodeURIComponent('گزارش مشکل - طلبه یار')+'&body='+encodeURIComponent('لطفاً مشکل یا پیشنهاد خود را اینجا بنویسید:\n\n');
 }
 function showAbout(){
-  alert('طلبه یار — نسخه ۱.۳.۰\nهمراه همیشگی شما در مسیر طلبگی\n\nبرنامه‌ای برای اوقات شرعی و آب‌وهوا، دستیار هوشمند شرعی، اخبار معتبر و آرامش روزانه.\n\nسازنده سایت: علیرضا مبشری');
+  openGlassModal('درباره طلبه یار', `
+    <div style="text-align:center; margin-bottom:14px;">
+      <div style="width:64px;height:64px;border-radius:20px; margin:0 auto 10px auto; display:flex; align-items:center; justify-content:center; background:linear-gradient(145deg,var(--green),var(--green-deep)); box-shadow:0 8px 22px rgba(0,0,0,0.25);">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#F7EFE3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M8 7h8M8 11h5"/></svg>
+      </div>
+      <h3 style="margin:0; font-size:16px;">طلبه یار</h3>
+      <p style="margin:4px 0 0 0; font-size:11px; color:var(--text-sub);">نسخه ${APP_VERSION.replace(/[0-9.]/g, d => '۰۱۲۳۴۵۶۷۸۹.'[('0123456789.').indexOf(d)])}</p>
+    </div>
+    <div class="about-block">
+      <div class="about-block-title">هدف برنامه</div>
+      <p>طلبه یار همراهی است برای طلاب و علاقه‌مندان به معارف دینی؛ دسترسی سریع به قرآن، اوقات شرعی، روایات، اشعار، سخنرانی‌ها و اخبار معتبر، همه در یک‌جا و بدون نیاز به جست‌وجوی پراکنده.</p>
+    </div>
+    <div class="about-block">
+      <div class="about-block-title">قابلیت‌ها</div>
+      <p>دستیار هوشمند شرعی، اوقات شرعی و آب‌وهوای لحظه‌ای، کتابخانه و اشعار دسته‌بندی‌شده، اخبار و اقتصاد، و شخصی‌سازی کامل پروفایل.</p>
+    </div>
+    <div class="about-block">
+      <div class="about-block-title">سازنده سایت</div>
+      <p>علیرضا مبشری</p>
+    </div>
+  `);
 }
 
 /* ============ QUICKNAV MARQUEE ============ */
@@ -2994,6 +3119,8 @@ const QUICKNAV_ITEMS = [
   {label:'کتابخانه', screen:'library', icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>'},
   {label:'اخبار', screen:'news', icon:'<path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>'},
   {label:'اقتصاد', screen:'economy', icon:'<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>'},
+  {label:'آب و هوا', screen:'weather', icon:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'},
+  {label:'هوش مصنوعی', screen:'assistant', icon:'<path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/>'},
   {label:'موسیقی', screen:'music', icon:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>'},
   {label:'امکانات', screen:'tools', icon:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>'},
   {label:'پروفایل', screen:'profile', icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>'},
@@ -3500,7 +3627,7 @@ function completeOnboarding(skip){
 }
 (function initOnboarding(){
   const preview = document.getElementById('obAvatarPreview');
-  if(preview) preview.innerHTML = currentAvatarSvg();
+  if(preview) preview.innerHTML = `<svg viewBox="0 0 64 64" fill="none" style="width:70%;height:70%;"><path d="M32 6C22 6 14 16 14 28V33H50V28C50 16 42 6 32 6Z" fill="none" stroke="url(#archGradObPrev)" stroke-width="2"/><path d="M32 6L32 14" stroke="url(#archGradObPrev)" stroke-width="2" stroke-linecap="round"/><path d="M11 46C11 46 21 40 32 43C43 40 53 46 53 46V51C53 51 43 45 32 48C21 45 11 51 11 51Z" fill="url(#logoDomeFillObPrev)" stroke="url(#archGradObPrev)" stroke-width="1"/><path d="M32 43V19" stroke="url(#archGradObPrev)" stroke-width="1.3" opacity="0.7"/><defs><linearGradient id="logoDomeFillObPrev" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3EAE7C"/><stop offset="100%" stop-color="#0A3527"/></linearGradient><linearGradient id="archGradObPrev" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5E3AE"/><stop offset="100%" stop-color="#C9A24B"/></linearGradient></defs></svg>`;
   if(localStorage.getItem('hy_onboarded') === '1'){
     document.getElementById('onboardScreen').classList.add('hide');
   } else {
@@ -3618,7 +3745,7 @@ function expandNavasan(){
 }
 loadNavasanWidget(NAVASAN_PRIORITY_URL);
 
-/* ============ PRAYER TIMES (اوقات شرعی) — theshia.org API ============ */
+/* ============ PRAYER TIMES (اوقات شرعی) — Aladhan API ============ */
 const PT_CITIES = [
   {group:'شهرهای مذهبی', name:'قم', lat:34.64, lng:50.88, tz:'Asia/Tehran'},
   {group:'شهرهای مذهبی', name:'مشهد', lat:36.30, lng:59.61, tz:'Asia/Tehran'},
@@ -3712,20 +3839,20 @@ const PT_LABELS = [
 async function loadPrayerTimesFor(city){
   const header = document.getElementById('ptCityHeader');
   const grid = document.getElementById('ptTimesGrid');
-  const todayStr = new Date().toISOString().slice(0,10);
   header.innerHTML = `<span class="pt-back-btn" onclick="changePtCity()">← تغییر شهر</span><div class="pt-city-name">${city.name}</div><div class="pt-date">در حال دریافت اوقات شرعی...</div>`;
   grid.innerHTML = '';
   try{
-    const url = `https://theshia.org/api/v1/prayer-times?lat=${city.lat}&lng=${city.lng}&method=Tehran&date=${todayStr}&tz=${encodeURIComponent(city.tz)}`;
+    // Aladhan API — روش محاسبه Jafari/Shia Ithna-Ashari (method=0)
+    const url = `https://api.aladhan.com/v1/timings?latitude=${city.lat}&longitude=${city.lng}&method=0&school=0&timezonestring=${encodeURIComponent(city.tz)}`;
     const res = await fetch(url);
     if(!res.ok) throw new Error('bad response');
     const data = await res.json();
-    const day = (data.days && data.days[0]) || data;
-    const local = day.local || day;
-    header.innerHTML = `<span class="pt-back-btn" onclick="changePtCity()">← تغییر شهر</span><div class="pt-city-name">${city.name}</div><div class="pt-date">${new Date().toLocaleDateString('fa-IR', {weekday:'long', day:'numeric', month:'long'})}</div>`;
+    const t = data.data.timings;
+    const hDate = data.data.date.hijri;
+    header.innerHTML = `<span class="pt-back-btn" onclick="changePtCity()">← تغییر شهر</span><div class="pt-city-name">${city.name}</div><div class="pt-date">${new Date().toLocaleDateString('fa-IR', {weekday:'long', day:'numeric', month:'long'})} — ${hDate.day} ${hDate.month.ar} ${hDate.year}</div>`;
+    const timingsMap = { fajr:t.Fajr, sunrise:t.Sunrise, dhuhr:t.Dhuhr, asr:t.Asr, maghrib:t.Maghrib, midnight:t.Midnight, isha:t.Isha, sunset:t.Sunset };
     grid.innerHTML = PT_LABELS.map(([key,label]) => {
-      const raw = local[key] || day[key] || '--:--';
-      const time = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : raw;
+      const time = (timingsMap[key] || '--:--').split(' ')[0];
       const hl = (key==='fajr' || key==='maghrib') ? 'highlight' : '';
       return `<div class="pt-time-card ${hl}"><span>${label}</span><b>${time}</b></div>`;
     }).join('');
@@ -3782,6 +3909,7 @@ function pickHomeCity(city){
   closeGlassModal();
   loadHomePrayerPanel(city);
   loadHomeWeatherPanel(city);
+  if(document.getElementById('screen-weather')?.classList.contains('active')) loadWeatherScreen(city);
   if(window._afterCityPrompt){ window._afterCityPrompt(); window._afterCityPrompt = null; }
 }
 // نگاشت کد وضعیت هوای Open-Meteo (WMO) به آیکون و برچسب فارسی
@@ -3813,29 +3941,67 @@ async function loadHomeWeatherPanel(city){
     cityEl.textContent = 'آب‌وهوا در دسترس نیست';
   }
 }
+
+/* ============ WEATHER SCREEN (صفحه‌ی مستقل آب و هوا) ============ */
+let wxSelectedCity = null;
+async function loadWeatherScreen(city){
+  wxSelectedCity = city;
+  const cityLabel = document.getElementById('wxCityLabel');
+  const icon = document.getElementById('wxIcon');
+  const temp = document.getElementById('wxTemp');
+  const label = document.getElementById('wxLabel');
+  const minmax = document.getElementById('wxMinMax');
+  const wind = document.getElementById('wxWind');
+  const humidity = document.getElementById('wxHumidity');
+  const feels = document.getElementById('wxFeels');
+  if(!cityLabel) return;
+  cityLabel.textContent = city.name;
+  label.textContent = 'در حال دریافت اطلاعات آب‌وهوا...';
+  try{
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('bad response');
+    const data = await res.json();
+    const c = data.current || {};
+    const info = WEATHER_CODE_MAP[c.weather_code] || {icon:'🌡️', label:'نامشخص'};
+    icon.textContent = info.icon;
+    temp.textContent = Math.round(c.temperature_2m) + '°';
+    label.textContent = info.label;
+    const tMax = data.daily?.temperature_2m_max?.[0];
+    const tMin = data.daily?.temperature_2m_min?.[0];
+    minmax.textContent = (tMax!=null && tMin!=null) ? `بیشینه ${Math.round(tMax)}° · کمینه ${Math.round(tMin)}°` : '';
+    wind.textContent = Math.round(c.wind_speed_10m) + ' km/h';
+    humidity.textContent = Math.round(c.relative_humidity_2m) + '٪';
+    feels.textContent = Math.round(c.apparent_temperature) + '°';
+  }catch(err){
+    console.error('weather screen fetch failed:', err);
+    label.textContent = 'دریافت آب‌وهوا ممکن نشد — اتصال اینترنت را بررسی کنید';
+  }
+}
+function changeWeatherCity(){
+  openCityPromptModal();
+}
 async function loadHomePrayerPanel(city){
   const azanEl = document.getElementById('statNextAzan');
   const cityEl = document.getElementById('statAzanCity');
   if(!azanEl || !cityEl) return;
   cityEl.textContent = 'در حال دریافت...';
   try{
-    const todayStr = new Date().toISOString().slice(0,10);
-    const url = `https://theshia.org/api/v1/prayer-times?lat=${city.lat}&lng=${city.lng}&method=Tehran&date=${todayStr}&tz=${encodeURIComponent(city.tz)}`;
+    const url = `https://api.aladhan.com/v1/timings?latitude=${city.lat}&longitude=${city.lng}&method=0&school=0&timezonestring=${encodeURIComponent(city.tz)}`;
     const res = await fetch(url);
     if(!res.ok) throw new Error('bad response');
     const data = await res.json();
-    const day = (data.days && data.days[0]) || data;
-    const local = day.local || day;
+    const t = data.data.timings;
+    const timingsMap = { fajr:t.Fajr, sunrise:t.Sunrise, dhuhr:t.Dhuhr, asr:t.Asr, maghrib:t.Maghrib, isha:t.Isha };
     const order = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
     // Collect every real prayer time for today, then randomly feature one —
     // rather than always pinning the display to the single "next" azan.
     const available = [];
     for(const [key,label] of PT_LABELS){
       if(!order.includes(key)) continue;
-      const raw = local[key] || day[key];
+      const raw = timingsMap[key];
       if(!raw) continue;
-      const timeStr = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : raw;
-      if(!timeStr) continue;
+      const timeStr = raw.split(' ')[0];
       available.push({key, label, timeStr});
     }
     let chosenLabel = null, chosenTime = null;
@@ -3845,9 +4011,8 @@ async function loadHomePrayerPanel(city){
       chosenTime = pick.timeStr;
     }
     if(!chosenTime){
-      const raw = local['fajr'] || day['fajr'];
       chosenLabel = 'اذان صبح';
-      chosenTime = typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : (raw || '--:--');
+      chosenTime = (timingsMap.fajr || '--:--').split(' ')[0];
     }
     azanEl.textContent = chosenTime;
     cityEl.textContent = `${chosenLabel} · ${city.name}`;
@@ -4771,7 +4936,7 @@ function selectAiMarja(marja){
   document.getElementById('aiMarjaTag').textContent = 'مرجع انتخابی: ' + marja;
   document.getElementById('aiHeadSub').textContent = 'بر اساس فتاوای ' + marja;
   aiChatHistory = [];
-  document.getElementById('aiChatLog').innerHTML = `<div class="ai-msg bot">سلام! سؤال شرعی یا طلبگی خودتون رو بپرسید — بر اساس فتاوای <b>${marja}</b> بررسی می‌کنم.</div>`;
+  document.getElementById('aiChatLog').innerHTML = `<div class="ai-msg-row bot"><div class="ai-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/></svg></div><div class="ai-msg bot">سلام! سؤال شرعی یا طلبگی خودتون رو بپرسید — بر اساس فتاوای <b>${marja}</b> بررسی می‌کنم.</div></div>`;
   setTimeout(()=>document.getElementById('searchInput')?.focus(), 150);
 }
 function resetAiMarja(){
@@ -4783,12 +4948,20 @@ function resetAiMarja(){
 }
 function appendAiMsg(role, text){
   const log = document.getElementById('aiChatLog');
-  const div = document.createElement('div');
-  div.className = 'ai-msg ' + (role==='user' ? 'user' : 'bot');
-  div.textContent = text;
-  log.appendChild(div);
+  const row = document.createElement('div');
+  row.className = 'ai-msg-row ' + (role==='user' ? 'user' : 'bot');
+  const isBot = role !== 'user';
+  const avatar = isBot
+    ? `<div class="ai-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/></svg></div>`
+    : `<div class="ai-avatar" style="background:linear-gradient(150deg,var(--sage),var(--green-soft));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
+  const bubble = document.createElement('div');
+  bubble.className = 'ai-msg ' + (role==='user' ? 'user' : 'bot');
+  bubble.textContent = text;
+  row.innerHTML = avatar;
+  row.appendChild(bubble);
+  log.appendChild(row);
   log.scrollTop = log.scrollHeight;
-  return div;
+  return bubble;
 }
 async function sendAiMessage(){
   const input = document.getElementById('searchInput');
@@ -4797,7 +4970,8 @@ async function sendAiMessage(){
   input.value = '';
   appendAiMsg('user', q);
   aiChatHistory.push({role:'user', content:q});
-  const loadingEl = appendAiMsg('bot', 'در حال بررسی...');
+  const loadingEl = appendAiMsg('bot', '');
+  loadingEl.innerHTML = '<span class="ai-typing"><span></span><span></span><span></span></span>';
   loadingEl.classList.add('loading');
 
   if(!GAPGPT_API_KEY || GAPGPT_API_KEY === 'YOUR_GAPGPT_API_KEY'){
@@ -4830,16 +5004,16 @@ async function sendAiMessage(){
 }
 
 /* ============ WHAT'S NEW panel — shown on EVERY visit (Play Store style) ============ */
-const APP_VERSION = '1.3.0';
+const APP_VERSION = '1.3.5';
 const WHATS_NEW = [
-  {icon:'<path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/>', text:'✨ دستیار هوشمند شرعی به یک صفحه‌ی مستقل و روان‌تر منتقل شد؛ بدون افت سرعت و مثل یک چت حرفه‌ای.', hl:true},
-  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'بخش آب‌وهوا و اوقات شرعی بهبود یافت.'},
-  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'آیکون‌های صفحه اصلی جذاب‌تر و متمایزتر شد.'},
-  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'یادآوری روایات به گوشه‌ی بالای صفحه منتقل شد و با فاصله‌ی زمانی بیشتری نمایش داده می‌شود.'},
-  {icon:'<path d="M20 6L9 17l-5-5"/>', text:'چند اشکال کوچک برطرف شد.'},
-  {icon:'<circle cx="12" cy="12" r="10"/><path d="M8 12l2.5 2.5L16 9"/>', text:'صفحه‌ی لودینگ و حالت آفلاین بهبود یافت.'},
-  {icon:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>', text:'لوگوها به‌روزرسانی شد.'},
-  {icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/>', text:'سازنده سایت: علیرضا مبشری'}
+  {icon:'<path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/>', text:'✨ دستیار هوشمند شرعی حسابی حرفه‌ای شد! حالا یک صفحه‌ی کامل و روان داره، مثل یک چت واقعی.', hl:true},
+  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'☀️ آب‌وهوا و اوقات شرعی رو با یک نگاه ببینید — دقیق‌تر و شیک‌تر از همیشه.'},
+  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'🎨 صفحه اصلی چهره‌ی تازه‌ای گرفت؛ آیکون‌ها جذاب‌تر و چشم‌نوازتر شدن.'},
+  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'🕊️ یادآوری روایات مزاحم‌تون نمی‌شه — رفته گوشه‌ی بالا و کمتر مزاحمتون میشه.'},
+  {icon:'<path d="M20 6L9 17l-5-5"/>', text:'🛠️ چند اشکال ریز رفع شد تا تجربه‌ی نرم‌تری داشته باشید.'},
+  {icon:'<circle cx="12" cy="12" r="10"/><path d="M8 12l2.5 2.5L16 9"/>', text:'📶 لودینگ و حالت آفلاین شکیل‌تر و کاربردی‌تر شدن.'},
+  {icon:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>', text:'✨ یک دست رنگ تازه روی لوگوها.'},
+  {icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/>', text:'با عشق ساخته شده توسط علیرضا مبشری 🌿'}
 ];
 function renderWhatsNew(){
   const list = document.getElementById('wnList');
@@ -4882,6 +5056,21 @@ function renderAvatarPicker(){
 function setProfileAvatar(src){
   profileAvatar = src;
   renderAvatarPicker();
+}
+function handleAvatarUpload(ev){
+  const file = ev.target.files && ev.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ showToast('لطفاً یک فایل تصویری انتخاب کنید'); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    profileAvatar = reader.result;
+    selectedAvatarId = null;
+    renderAvatarPicker();
+    applyProfileAvatar();
+    showToast('تصویر پروفایل به‌روزرسانی شد');
+  };
+  reader.onerror = () => showToast('خطا در خواندن تصویر');
+  reader.readAsDataURL(file);
 }
 function applyProfileAvatar(){
   const initEl = document.getElementById('avatarInitial');
@@ -4945,6 +5134,8 @@ applyProfileAvatar();
   document.body.appendChild(toast);
   let lastIdx = -1;
   function showToast(){
+    const enabled = JSON.parse(localStorage.getItem('hy_hadith_reminder') ?? 'true');
+    if(!enabled) return;
     let idx;
     do{ idx = Math.floor(Math.random()*SAYINGS.length); }while(idx===lastIdx && SAYINGS.length>1);
     lastIdx = idx;
@@ -4957,7 +5148,7 @@ applyProfileAvatar();
     toast._hideTimer = setTimeout(()=> toast.classList.remove('show'), 8000);
   }
   setTimeout(showToast, 15000);
-  setInterval(showToast, 240000);
+  setInterval(showToast, 120000);
 })();
 
 /* ============ SPLASH STATUS MESSAGES (نمایش مراحل بارگذاری) ============ */
