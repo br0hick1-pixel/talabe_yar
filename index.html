@@ -613,7 +613,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
   border:1px solid rgba(15,61,46,0.10); box-shadow:var(--shadow); padding:10px 0;
 }
 .hadith-toast{
-  position:fixed; left:50%; bottom:88px; transform:translate(-50%,20px); width:min(92vw,380px); z-index:60;
+  position:fixed; left:50%; top:calc(14px + env(safe-area-inset-top)); bottom:auto; transform:translate(-50%,-20px); width:min(92vw,380px); z-index:60;
   background:rgba(255,255,255,0.55); backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
   border:1px solid rgba(255,255,255,0.5); border-radius:16px; padding:12px 14px; box-shadow:0 12px 30px rgba(0,0,0,0.25);
   opacity:0; pointer-events:none; transition:opacity .5s ease, transform .5s ease;
@@ -651,6 +651,19 @@ h1,h2,h3,h4,p{font-family:inherit;}
 #splash .splash-sub{color:#C9A24B; font-size:12px; opacity:.85;}
 #splash .splash-loader{width:120px; height:3px; border-radius:3px; background:rgba(255,255,255,0.12); overflow:hidden; margin-top:6px;}
 #splash .splash-loader::after{content:''; display:block; height:100%; width:40%; background:var(--gold); border-radius:3px; animation:splashLoad 1.4s ease-in-out infinite;}
+#splash .splash-status{color:#C9A24B; font-size:10.5px; opacity:.75; margin-top:10px; min-height:14px; transition:opacity .3s ease;}
+
+/* ---------- Offline Banner ---------- */
+.offline-banner{
+  position:fixed; left:50%; top:calc(14px + env(safe-area-inset-top)); transform:translate(-50%,-30px); width:min(92vw,380px); z-index:80;
+  display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:16px;
+  background:rgba(30,20,20,0.85); backdrop-filter:blur(10px); color:#F7EFE3;
+  box-shadow:0 12px 30px rgba(0,0,0,0.3); opacity:0; pointer-events:none; transition:opacity .4s ease, transform .4s ease;
+}
+.offline-banner.show{ opacity:1; transform:translate(-50%,0); pointer-events:auto; }
+.offline-logo{ flex:0 0 auto; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.08); color:var(--gold-soft); }
+.offline-text{ font-size:11.5px; line-height:1.7; }
+.offline-text span{ display:block; font-size:9.5px; opacity:.7; }
 @keyframes splashLoad{0%{transform:translateX(-100%);}100%{transform:translateX(350%);}}
 
 /* =========================================================
@@ -1051,6 +1064,16 @@ h1,h2,h3,h4,p{font-family:inherit;}
 [data-theme="dark"] .search-go{color:#0F1A15;}
 .search-go svg{width:19px;height:19px;}
 .search-hint{font-size:10.5px; color:var(--text-sub); margin-top:10px; line-height:1.8;}
+
+/* ---------- AI Assistant — صفحه مستقل (بدون افکت‌های سنگین برای روانی بیشتر) ---------- */
+#screen-assistant{ display:none; flex-direction:column; min-height:calc(100vh - 20px); }
+#screen-assistant.active{ display:flex; }
+#screen-assistant .ai-page-chat{ display:flex; flex-direction:column; flex:1; min-height:0; }
+.ai-chat-log-page{ flex:1; max-height:none; min-height:50vh; }
+.ai-input-row{ position:sticky; bottom:calc(70px + env(safe-area-inset-bottom)); background:var(--cream); padding-top:6px; }
+/* هنگام باز بودن صفحه دستیار، انیمیشن‌های پس‌زمینه متوقف می‌شوند تا اسکرول و تایپ روان‌تر بماند */
+body:has(#screen-assistant.active) .arch-bg .orb,
+body:has(#screen-assistant.active) .arch-bg .ray{ animation-play-state:paused; }
 /* =========================================================
    NEW: "What's New" release panel (Google-Play style, dismissible)
 ========================================================= */
@@ -1272,6 +1295,15 @@ h1,h2,h3,h4,p{font-family:inherit;}
   <div class="splash-sub" style="letter-spacing:2px; font-size:10.5px; opacity:.7; margin-top:-6px;">TALABE YAR</div>
   <div class="splash-sub">همراه همیشگی شما در مسیر طلبگی</div>
   <div class="splash-loader"></div>
+  <div class="splash-status" id="splashStatus">در حال آماده‌سازی...</div>
+</div>
+
+<!-- ===================== OFFLINE BANNER (لوگوی اختصاصی هنگام قطعی اینترنت) ===================== -->
+<div id="offlineBanner" class="offline-banner">
+  <div class="offline-logo">
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.6L21 11l-6.4 2L12 20l-2.2-6.6L4 11l6.4-2L12 2z" opacity=".55"/><path d="M2 2l20 20"/></svg>
+  </div>
+  <div class="offline-text">اتصال اینترنت برقرار نیست<span>برخی امکانات تا اتصال مجدد در دسترس نیستند</span></div>
 </div>
 <div class="arch-bg"><div class="sunglow"></div><div class="calligraphy">بسم الله الرحمن الرحیم</div><div class="ray"></div><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
 <div id="app">
@@ -1802,7 +1834,7 @@ h1,h2,h3,h4,p{font-family:inherit;}
       </div>
       <div class="row" onclick="showAbout()">
         <div class="row-art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
-        <div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۱.۵</div></div>
+        <div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۳.۰</div></div>
         <div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div>
       </div>
     </div>
@@ -1869,9 +1901,38 @@ h1,h2,h3,h4,p{font-family:inherit;}
 
     <div class="settings-group">
       <div class="sg-title">درباره برنامه</div>
-      <div class="row" onclick="showAbout()"><div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۱.۵</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
+      <div class="row" onclick="showAbout()"><div class="row-info"><div class="r1">درباره طلبه یار</div><div class="r2">نسخه ۱.۳.۰</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
       <div class="row" onclick="shareApp()" style="border-top:1px solid var(--cream-deep);"><div class="row-info"><div class="r1">اشتراک‌گذاری برنامه</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
       <div class="row" onclick="reportProblem()" style="border-top:1px solid var(--cream-deep);"><div class="row-info"><div class="r1">گزارش مشکل</div></div><div class="row-action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== AI ASSISTANT (صفحه مستقل) ===================== -->
+  <section class="screen" id="screen-assistant">
+    <div class="topbar">
+      <button class="icon-btn" onclick="go('home')" aria-label="بازگشت"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="brand-text" style="text-align:center;"><div class="t1" style="font-size:18px;">دستیار هوشمند شرعی</div><div class="t2" id="aiHeadSub">راهنمای شما در پرسش‌های دینی و طلبگی</div></div>
+      <div style="width:40px;"></div>
+    </div>
+
+    <div id="aiStepMarja">
+      <p class="search-hint" style="margin:0 0 12px 0;">پیش از پرسش شرعی، بفرمایید بر اساس فتاوای کدام مرجع بررسی کنم:</p>
+      <div class="ai-marja-grid">
+        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله سیستانی')">آیت‌الله سیستانی</button>
+        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله خامنه‌ای')">آیت‌الله خامنه‌ای</button>
+        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله مکارم شیرازی')">آیت‌الله مکارم شیرازی</button>
+        <button class="ai-marja-btn" onclick="selectAiMarja('عمومی / نامشخص')">عمومی (بدون مرجع خاص)</button>
+      </div>
+    </div>
+
+    <div id="aiStepChat" class="ai-page-chat" style="display:none;">
+      <div class="ai-marja-tag" id="aiMarjaTag"></div>
+      <div class="ai-chat-log ai-chat-log-page" id="aiChatLog"></div>
+      <div class="search-row ai-input-row">
+        <input type="text" id="searchInput" placeholder="سؤال خود را بنویسید..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+        <button class="search-go" onclick="sendAiMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <p class="search-hint">پاسخ‌های دستیار هوشمند جنبه‌ی راهنمایی اولیه دارد و جایگزین استفتاء مستقیم از دفتر مرجع نیست. <span class="ai-change-marja" onclick="resetAiMarja()">تغییر مرجع</span></p>
     </div>
   </section>
 
@@ -1942,39 +2003,10 @@ h1,h2,h3,h4,p{font-family:inherit;}
 
   <div class="toast" id="toast"></div>
 
-  <!-- ===================== AI ASSISTANT (شرعی) ===================== -->
-  <button class="search-fab ai-fab" id="searchFab" onclick="openSearchPanel()" aria-label="دستیار هوشمند شرعی">
+  <!-- ===================== AI ASSISTANT — دکمه شناور به صفحه مستقل ===================== -->
+  <button class="search-fab ai-fab" id="searchFab" onclick="go('assistant')" aria-label="دستیار هوشمند شرعی">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z"/><path d="M5 14l.6 1.7L7.5 16l-1.9.6L5 18.5l-.6-1.9L2.5 16l1.9-.3L5 14z"/></svg>
   </button>
-
-  <div class="search-overlay" id="searchOverlay" onclick="closeSearchPanel()"></div>
-  <div class="search-panel ai-panel" id="searchPanel">
-    <div class="search-head">
-      <div class="sh-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/></svg></div>
-      <div><h4>دستیار هوشمند شرعی</h4><p id="aiHeadSub">راهنمای شما در پرسش‌های دینی و طلبگی</p></div>
-      <button class="search-close" onclick="closeSearchPanel()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    </div>
-
-    <div id="aiStepMarja">
-      <p class="search-hint" style="margin:0 0 12px 0;">پیش از پرسش شرعی، بفرمایید بر اساس فتاوای کدام مرجع بررسی کنم:</p>
-      <div class="ai-marja-grid">
-        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله سیستانی')">آیت‌الله سیستانی</button>
-        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله خامنه‌ای')">آیت‌الله خامنه‌ای</button>
-        <button class="ai-marja-btn" onclick="selectAiMarja('آیت‌الله مکارم شیرازی')">آیت‌الله مکارم شیرازی</button>
-        <button class="ai-marja-btn" onclick="selectAiMarja('عمومی / نامشخص')">عمومی (بدون مرجع خاص)</button>
-      </div>
-    </div>
-
-    <div id="aiStepChat" style="display:none;">
-      <div class="ai-marja-tag" id="aiMarjaTag"></div>
-      <div class="ai-chat-log" id="aiChatLog"></div>
-      <div class="search-row">
-        <input type="text" id="searchInput" placeholder="سؤال خود را بنویسید..." onkeydown="if(event.key==='Enter') sendAiMessage()">
-        <button class="search-go" onclick="sendAiMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </div>
-      <p class="search-hint">پاسخ‌های دستیار هوشمند جنبه‌ی راهنمایی اولیه دارد و جایگزین استفتاء مستقیم از دفتر مرجع نیست. <span class="ai-change-marja" onclick="resetAiMarja()">تغییر مرجع</span></p>
-    </div>
-  </div>
 </div>
 
   <!-- ===================== WHAT'S NEW ===================== -->
@@ -2348,6 +2380,7 @@ function go(name){
   if(name==='library') renderLibrary();
   if(name==='economy') loadEconomyPrices(false);
   if(name==='prayertimes') renderPtCityList('');
+  if(name==='assistant') setTimeout(()=>document.getElementById('searchInput')?.focus(), 200);
 }
 function openImam(id){
   renderImamDetail(id);
@@ -2949,7 +2982,7 @@ function reportProblem(){
   window.location.href = 'mailto:'+email+'?subject='+encodeURIComponent('گزارش مشکل - طلبه یار')+'&body='+encodeURIComponent('لطفاً مشکل یا پیشنهاد خود را اینجا بنویسید:\n\n');
 }
 function showAbout(){
-  alert('طلبه یار — نسخه ۱.۱.۵\nهمراه همیشگی شما در مسیر طلبگی\n\nبرنامه‌ای برای پخش موسیقی محلی، دسترسی به اخبار معتبر و آرامش روزانه.');
+  alert('طلبه یار — نسخه ۱.۳.۰\nهمراه همیشگی شما در مسیر طلبگی\n\nبرنامه‌ای برای اوقات شرعی و آب‌وهوا، دستیار هوشمند شرعی، اخبار معتبر و آرامش روزانه.\n\nسازنده سایت: علیرضا مبشری');
 }
 
 /* ============ QUICKNAV MARQUEE ============ */
@@ -4705,15 +4738,9 @@ renderOnlineMaddah();
 /* =========================================================
    NEW: SEARCH ASSISTANT — redirects the user's question to Google
 ========================================================= */
-function openSearchPanel(){
-  document.getElementById('searchOverlay').classList.add('show');
-  document.getElementById('searchPanel').classList.add('show');
-  setTimeout(()=>document.getElementById('searchInput')?.focus(), 200);
-}
-function closeSearchPanel(){
-  document.getElementById('searchOverlay').classList.remove('show');
-  document.getElementById('searchPanel').classList.remove('show');
-}
+// دستیار هوشمند اکنون یک صفحه‌ی مستقل است (screen-assistant)؛ این توابع برای سازگاری نگه داشته شده‌اند.
+function openSearchPanel(){ go('assistant'); }
+function closeSearchPanel(){ go('home'); }
 
 /* ============ AI ASSISTANT — دستیار هوشمند شرعی (GapGPT — OpenAI-compatible) ============ */
 // ⚠️ کلید API را اینجا قرار دهید. توجه: قرار دادن کلید در کد سمت کاربر (client-side) یعنی
@@ -4805,12 +4832,14 @@ async function sendAiMessage(){
 /* ============ WHAT'S NEW panel — shown on EVERY visit (Play Store style) ============ */
 const APP_VERSION = '1.3.0';
 const WHATS_NEW = [
-  {icon:'<path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/>', text:'✨ دستیار هوشمند شرعی اضافه شد! پیش از پاسخ، مرجع تقلید موردنظرتان را می‌پرسد و بر همان اساس راهنمایی می‌کند.', hl:true},
-  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'بخش سخنرانی به منابع پایدارتر (واعظین، نوا) مجهز شد تا همیشه در دسترس باشد.'},
-  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'آب‌وهوای لحظه‌ای شهر شما، کنار ساعت و اوقات شرعی در صفحه اصلی نمایش داده می‌شود.'},
-  {icon:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>', text:'پنل انتخاب شهر بازطراحی شد و زودتر — پیش از اعلان تغییرات نسخه — نمایش داده می‌شود.'},
-  {icon:'<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>', text:'اشکال نمایش قیمت‌های اقتصاد در تم تیره برطرف شد (متن روی پس‌زمینه تیره واقعاً خوانا شد).'},
-  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'رفع اشکال بارگذاری صفحه از موقعیت اسکرول اشتباه؛ برنامه اکنون همیشه از بالای صفحه شروع می‌شود.'}
+  {icon:'<path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z"/>', text:'✨ دستیار هوشمند شرعی به یک صفحه‌ی مستقل و روان‌تر منتقل شد؛ بدون افت سرعت و مثل یک چت حرفه‌ای.', hl:true},
+  {icon:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', text:'بخش آب‌وهوا و اوقات شرعی بهبود یافت.'},
+  {icon:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>', text:'آیکون‌های صفحه اصلی جذاب‌تر و متمایزتر شد.'},
+  {icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>', text:'یادآوری روایات به گوشه‌ی بالای صفحه منتقل شد و با فاصله‌ی زمانی بیشتری نمایش داده می‌شود.'},
+  {icon:'<path d="M20 6L9 17l-5-5"/>', text:'چند اشکال کوچک برطرف شد.'},
+  {icon:'<circle cx="12" cy="12" r="10"/><path d="M8 12l2.5 2.5L16 9"/>', text:'صفحه‌ی لودینگ و حالت آفلاین بهبود یافت.'},
+  {icon:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>', text:'لوگوها به‌روزرسانی شد.'},
+  {icon:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0114 0v1"/>', text:'سازنده سایت: علیرضا مبشری'}
 ];
 function renderWhatsNew(){
   const list = document.getElementById('wnList');
@@ -4908,7 +4937,7 @@ applyProfileAvatar();
   });
 })();
 
-/* ============ PERIODIC HADITH TOAST — every 20s ============ */
+/* ============ PERIODIC HADITH TOAST — گوشه‌ی بالا، هر چند دقیقه یک‌بار ============ */
 (function(){
   const toast = document.createElement('div');
   toast.className = 'hadith-toast';
@@ -4927,8 +4956,37 @@ applyProfileAvatar();
     clearTimeout(toast._hideTimer);
     toast._hideTimer = setTimeout(()=> toast.classList.remove('show'), 8000);
   }
-  setInterval(showToast, 20000);
+  setTimeout(showToast, 15000);
+  setInterval(showToast, 240000);
 })();
+
+/* ============ SPLASH STATUS MESSAGES (نمایش مراحل بارگذاری) ============ */
+(function(){
+  const el = document.getElementById('splashStatus');
+  if(!el) return;
+  const steps = ['در حال آماده‌سازی...', 'در حال بارگذاری محتوا...', 'در حال آماده‌سازی رابط کاربری...', 'تقریباً آماده است...'];
+  let i = 0;
+  const t = setInterval(()=>{
+    i++;
+    if(i>=steps.length){ clearInterval(t); return; }
+    el.style.opacity = 0;
+    setTimeout(()=>{ el.textContent = steps[i]; el.style.opacity = .75; }, 200);
+  }, 500);
+})();
+
+/* ============ OFFLINE / ONLINE STATUS (لوگوی اختصاصی هنگام قطع اینترنت) ============ */
+(function(){
+  const banner = document.getElementById('offlineBanner');
+  if(!banner) return;
+  function updateStatus(){
+    if(navigator.onLine){ banner.classList.remove('show'); }
+    else{ banner.classList.add('show'); }
+  }
+  window.addEventListener('online', updateStatus);
+  window.addEventListener('offline', updateStatus);
+  updateStatus();
+})();
+
 setTimeout(()=>{
   const s=document.getElementById('splash'); if(s) s.classList.add('hide');
   // City question comes first; the "what's new" panel only follows once
